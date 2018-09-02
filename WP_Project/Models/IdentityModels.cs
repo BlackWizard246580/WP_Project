@@ -24,6 +24,13 @@ namespace WP_Project.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+        public DbSet<Category> Category { get; set; }
+        public DbSet<CustomField> CustomField { get; set; }
+        public DbSet<CustomFieldValue> CustomFieldValue { get; set; }
+        public DbSet<Item> Item { get; set; }
+        public DbSet<Order> Order { get; set; }
+        public DbSet<OrderDetail> OrderDetail { get; set; }
+
 
         public static ApplicationDbContext Create()
         {
