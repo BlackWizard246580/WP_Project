@@ -191,12 +191,21 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="DAL\DBInitializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201809020339398_DBContext-1.cs" />
     <Compile Include="Migrations\201809020339398_DBContext-1.Designer.cs">
       <DependentUpon>201809020339398_DBContext-1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809150736279_WP_1.1.cs" />
+    <Compile Include="Migrations\201809150736279_WP_1.1.Designer.cs">
+      <DependentUpon>201809150736279_WP_1.1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809160312016_update-item.cs" />
+    <Compile Include="Migrations\201809160312016_update-item.Designer.cs">
+      <DependentUpon>201809160312016_update-item.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -234,7 +243,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -282,7 +293,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
@@ -290,6 +303,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201809020339398_DBContext-1.resx">
       <DependentUpon>201809020339398_DBContext-1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809150736279_WP_1.1.resx">
+      <DependentUpon>201809150736279_WP_1.1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809160312016_update-item.resx">
+      <DependentUpon>201809160312016_update-item.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

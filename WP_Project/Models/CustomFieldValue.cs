@@ -13,5 +13,7 @@ namespace WP_Project.Models
         public double AdditionalPrice { get; set; }
 
         public virtual ICollection<CustomField> CustomFields { get; set; }
+
+        public CustomField CustomField { get; set; }
     }
 }
