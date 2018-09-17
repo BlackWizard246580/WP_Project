@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -190,6 +191,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LayoutTestController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DAL\DBInitializer.cs" />
     <Compile Include="Global.asax.cs">
@@ -223,12 +225,43 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\animate.css" />
+    <Content Include="Content\business-frontpage.css" />
+    <Content Include="Content\classy-nav.min.css" />
+    <Content Include="Content\core-style.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\jquery-ui.min.css" />
+    <Content Include="Content\landing-page.css" />
+    <Content Include="Content\landing-page.min.css" />
+    <Content Include="Content\magnific-popup.css" />
+    <Content Include="Content\nice-select.css" />
+    <Content Include="Content\owl.carousel.css" />
+    <Content Include="Content\simple-line-icons.css" />
+    <Content Include="Content\core-style.css.map" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\helvetica_neu_bold-webfont.ttf" />
+    <Content Include="fonts\helvetica_neu_bold-webfont.woff" />
+    <Content Include="fonts\helvetica_neu_bold-webfont.woff2" />
+    <Content Include="fonts\helveticaneue_medium-webfont.ttf" />
+    <Content Include="fonts\helveticaneue_medium-webfont.woff" />
+    <Content Include="fonts\helveticaneue_medium-webfont.woff2" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\active.js" />
+    <Content Include="Scripts\classy-nav.min.js" />
+    <Content Include="Scripts\map-active.js" />
+    <Content Include="Scripts\plugins.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\jquery\jquery-2.2.4.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -279,9 +312,18 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\ShopLayout.cshtml" />
+    <Content Include="Views\LayoutTest\Shop.cshtml" />
+    <Content Include="Views\LayoutTest\Cart.cshtml" />
+    <Content Include="Views\LayoutTest\Checkout.cshtml" />
+    <Content Include="Views\LayoutTest\Index.cshtml" />
+    <Content Include="Views\LayoutTest\IndexSection.cshtml" />
+    <Content Include="Views\Shared\IndexSection.cshtml" />
+    <Content Include="Views\LayoutTest\ProductDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="img\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
