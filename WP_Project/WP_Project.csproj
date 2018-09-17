@@ -190,6 +190,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LayoutTestController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -208,6 +209,10 @@
     <Compile Include="Migrations\201809160312016_update-item.cs" />
     <Compile Include="Migrations\201809160312016_update-item.Designer.cs">
       <DependentUpon>201809160312016_update-item.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809171739097_cat-item.cs" />
+    <Compile Include="Migrations\201809171739097_cat-item.Designer.cs">
+      <DependentUpon>201809171739097_cat-item.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -320,10 +325,13 @@
     <Content Include="Views\LayoutTest\IndexSection.cshtml" />
     <Content Include="Views\Shared\IndexSection.cshtml" />
     <Content Include="Views\LayoutTest\ProductDetails.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Category\GetItems.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="img\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -351,6 +359,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809160312016_update-item.resx">
       <DependentUpon>201809160312016_update-item.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809171739097_cat-item.resx">
+      <DependentUpon>201809171739097_cat-item.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
