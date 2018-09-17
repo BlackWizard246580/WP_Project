@@ -10,7 +10,8 @@ namespace WP_Project.Models
         public int ItemID { get; set; }
         public string ItemName { get; set; }
         public double ItemPrice { get; set; }
+        public int CategoryID { get; set; }
 
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

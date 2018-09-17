@@ -1,0 +1,27 @@
+﻿@model IEnumerable<WP_Project.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Category List</h2>
+
+@Html.ActionLink("All Items", "GetItems", "Category")
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <a href="/Category/GetItems/@item.CategoryID">@item.CategoryName</a>
+            @*@Html.DisplayFor(modelItem => item.CategoryName)*@
+        </td>
+    </tr>
+}
+
+</table>

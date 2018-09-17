@@ -9,5 +9,7 @@ namespace WP_Project.Models
     {
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
+
+        public virtual ICollection<Item> Items { get; set; }
     }
 }
