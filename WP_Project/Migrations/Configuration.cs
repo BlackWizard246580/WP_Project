@@ -21,9 +21,9 @@ namespace WP_Project.Migrations
             var dbInit = new DBInitializer();
             dbInit.SeedCategory(context);
             dbInit.SeedItem(context);
-            //dbInit.SeedCustomField(context);
-            //dbInit.SeedCustomFieldValue(context);
-
+            dbInit.SeedCustomField(context);
+            dbInit.SeedCustomFieldValue(context);
+            dbInit.SeedCustomFieldItems(context);
         }
     }
     }

@@ -7,49 +7,82 @@ using WP_Project.Models;
 
 namespace WP_Project.DAL
 {
-    public class DBInitializer
+    public class DBInitializer : CreateDatabaseIfNotExists<ApplicationDbContext>
     {
-        public DBInitializer()
+        internal void SeedCustomFieldValue(ApplicationDbContext context)
         {
-
-        }
-        public class DbInitializer : CreateDatabaseIfNotExists<ApplicationDbContext>
-        {
-            public DbInitializer()
+            CustomField size = context.CustomField.Find(1);
+            CustomField sauce = context.CustomField.Find(2);
+            CustomField cheese = context.CustomField.Find(3);
+            CustomField spicy = context.CustomField.Find(4);
+            var customfieldvalues = new List<CustomFieldValue>
             {
-            }
+            new CustomFieldValue{CustomFieldValueName="Medium", AdditionalPrice=0, CustomField=size},
+            new CustomFieldValue{CustomFieldValueName="Large", AdditionalPrice=1000, CustomField=size},
 
+            new CustomFieldValue{CustomFieldValueName="No Sauce", AdditionalPrice=0, CustomField=sauce},
+            new CustomFieldValue{CustomFieldValueName="Tomato Sauce", AdditionalPrice=600, CustomField=sauce},
+            new CustomFieldValue{CustomFieldValueName="BBQ Sauce", AdditionalPrice=1000, CustomField=sauce},
+            new CustomFieldValue{CustomFieldValueName="Extra Tomato Sauce", AdditionalPrice=1000, CustomField=sauce},
+            new CustomFieldValue{CustomFieldValueName="Extra BBQ Sauce", AdditionalPrice=1400, CustomField=sauce},
+
+            new CustomFieldValue{CustomFieldValueName="Mozzarela", AdditionalPrice=1500, CustomField=cheese},
+            new CustomFieldValue{CustomFieldValueName="Cheddar", AdditionalPrice=1200, CustomField=cheese},
+
+            new CustomFieldValue{CustomFieldValueName="1", AdditionalPrice=0, CustomField=spicy},
+            new CustomFieldValue{CustomFieldValueName="2", AdditionalPrice=0, CustomField=spicy},
+            new CustomFieldValue{CustomFieldValueName="3", AdditionalPrice=0, CustomField=spicy},
+            new CustomFieldValue{CustomFieldValueName="4", AdditionalPrice=0, CustomField=spicy},
+            new CustomFieldValue{CustomFieldValueName="5", AdditionalPrice=0, CustomField=spicy},
+            };
+            customfieldvalues.ForEach(s => context.CustomFieldValue.Add(s));
+            context.SaveChanges();
         }
 
-        //internal void SeedCustomFieldValue(ApplicationDbContext context)
-        //{
-        //    CustomField size = context.CustomField.Find(1);
-        //    CustomField sauce = context.CustomField.Find(2);
-        //    var customfieldvalues = new List<CustomFieldValue>
-        //    {
-        //    new CustomFieldValue{CustomFieldValueName="Medium", AdditionalPrice=0, CustomField=size},
-        //    new CustomFieldValue{CustomFieldValueName="Large", AdditionalPrice=1000, CustomField=size},
+        internal void SeedCustomField(ApplicationDbContext context)
+        {
+            var customfields = new List<CustomField>
+            {
+            new CustomField{CustomFieldName="Size"},
+            new CustomField{CustomFieldName="Sauce"},
+            new CustomField{CustomFieldName="Cheese"},
+            new CustomField{CustomFieldName="Spicy Level"},
+            };
+            customfields.ForEach(s => context.CustomField.Add(s));
+            context.SaveChanges();
+        }
 
-        //    new CustomFieldValue{CustomFieldValueName="No Sauce", AdditionalPrice=0, CustomField=size},
-        //    new CustomFieldValue{CustomFieldValueName="Tomato Sauce", AdditionalPrice=600, CustomField=size},
-        //    new CustomFieldValue{CustomFieldValueName="BBQ Sauce", AdditionalPrice=1000, CustomField=size},
-        //    new CustomFieldValue{CustomFieldValueName="Extra Tomato Sauce", AdditionalPrice=1000, CustomField=size},
-        //    new CustomFieldValue{CustomFieldValueName="Extra BBQ Sauce", AdditionalPrice=1400, CustomField=size},
-        //    };
-        //    customfieldvalues.ForEach(s => context.CustomFieldValue.Add(s));
-        //    context.SaveChanges();
-        //}
+        internal void SeedCustomFieldItems(ApplicationDbContext context)
+        {
+            CustomField size = context.CustomField.Find(1);
+            CustomField sauce = context.CustomField.Find(2);
+            CustomField cheese = context.CustomField.Find(3);
+            CustomField spicy = context.CustomField.Find(4);
 
-        //internal void SeedCustomField(ApplicationDbContext context)
-        //{
-        //    var customfields = new List<CustomField>
-        //    {
-        //    new CustomField{CustomFieldName="Size"},
-        //    new CustomField{CustomFieldName="Sauce"},
-        //    };
-        //    customfields.ForEach(s => context.CustomField.Add(s));
-        //    context.SaveChanges();
-        //}
+            Item chicken_supreme = context.Item.Find(1);
+            chicken_supreme.CustomFields.Add(size);
+            chicken_supreme.CustomFields.Add(sauce);
+            chicken_supreme.CustomFields.Add(cheese);
+
+            Item cheese_lover = context.Item.Find(2);
+            cheese_lover.CustomFields.Add(size);
+
+            Item ham_lover = context.Item.Find(3);
+            ham_lover.CustomFields.Add(size);
+            ham_lover.CustomFields.Add(sauce);
+
+            Item bbq_beef = context.Item.Find(4);
+            ham_lover.CustomFields.Add(size);
+            ham_lover.CustomFields.Add(sauce);
+
+            Item hot_spicy = context.Item.Find(5);
+            hot_spicy.CustomFields.Add(size);
+            hot_spicy.CustomFields.Add(sauce);
+            hot_spicy.CustomFields.Add(spicy);
+
+            //customfields.ForEach(s => context.CustomField.Add(s));
+            context.SaveChanges();
+        }
 
         internal void SeedItem(ApplicationDbContext context)
         {

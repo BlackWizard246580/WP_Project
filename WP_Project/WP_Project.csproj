@@ -192,6 +192,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\LayoutTestController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DAL\DBInitializer.cs" />
@@ -214,6 +215,10 @@
     <Compile Include="Migrations\201809171739097_cat-item.Designer.cs">
       <DependentUpon>201809171739097_cat-item.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809171903561_customfield-customfieldvalue.cs" />
+    <Compile Include="Migrations\201809171903561_customfield-customfieldvalue.Designer.cs">
+      <DependentUpon>201809171903561_customfield-customfieldvalue.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -226,6 +231,7 @@
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ItemDetailVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -327,11 +333,12 @@
     <Content Include="Views\LayoutTest\ProductDetails.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\Category\GetItems.cshtml" />
+    <Content Include="Views\Item\Index.cshtml" />
+    <Content Include="Views\Item\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="img\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -362,6 +369,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809171739097_cat-item.resx">
       <DependentUpon>201809171739097_cat-item.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809171903561_customfield-customfieldvalue.resx">
+      <DependentUpon>201809171903561_customfield-customfieldvalue.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
