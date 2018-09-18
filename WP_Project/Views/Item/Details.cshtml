@@ -1,0 +1,54 @@
+﻿@model WP_Project.ViewModels.ItemDetailVM
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Model.ItemName - Details</h2>
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.CategoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.CategoryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemPrice)
+        </dd>
+
+    </dl>
+</div>
+
+<h3>Custom Fields</h3>
+@foreach (var cs in Model.CustomFields)
+{
+    <h4>@cs.CustomFieldName</h4>
+    foreach (var csv in cs.CustomFieldValues)
+    {
+        <dl class="dl-horizontal">
+            <dd>@csv.CustomFieldValueName</dd>
+        </dl>
+    }
+    <hr />
+}

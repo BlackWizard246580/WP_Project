@@ -9,11 +9,9 @@ namespace WP_Project.Models
     {
         public int CustomFieldValueID { get; set; }
         public string CustomFieldValueName { get; set; }
-        public int CustomFieldID { get; set; }
         public double AdditionalPrice { get; set; }
+        public int CustomFieldID { get; set; }
 
-        public virtual ICollection<CustomField> CustomFields { get; set; }
-
-        public CustomField CustomField { get; set; }
+        public virtual CustomField CustomField { get; set; }
     }
 }
