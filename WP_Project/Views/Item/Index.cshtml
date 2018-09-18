@@ -2,9 +2,12 @@
 
 @{
     ViewBag.Title = "Index";
+    int cartItemCount = (Session["cartItemCount"] != null) ? (int)Session["cartItemCount"] : 0;
 }
 
 <h2>Index</h2>
+
+Count of CartItem - <span class="itemcount">@cartItemCount</span>
 
 <table class="table">
     <tr>
@@ -20,21 +23,51 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category.CategoryName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ItemName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ItemPrice)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.ItemID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        int classid = item.ItemID;
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemPrice)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.ItemID })
+            </td>
+            <td>
+                @*<a href="@Url.Action("AddToCart","Cart", new { id = item.ItemID })">AddToCart</a>*@
+
+                <button class="add-to-cart" id="@classid">AddToCart</button>
+            </td>
+        </tr>
+    }
 
 </table>
+
+@section Scripts {
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"> </script>
+    <script type="text/javascript"> 
+        $(function () {
+            $('.add-to-cart').click(function () {
+                var id = $(this).attr("id");
+                $.ajax({
+                    url: '/Cart/AddToCart/'+id, type: "GET", dataType: "text",
+                    data: { id: id },
+                    success: function (data) {
+                        $("span").html(data);
+                    },
+                    error: function (xhr, status, error) {
+                        alert(xhr.responseText);
+                        alert(status);
+                        alert(error);
+                    }
+                });
+            });
+        }); 
+    </script>
+}

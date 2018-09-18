@@ -40,15 +40,99 @@
     </dl>
 </div>
 
-<h3>Custom Fields</h3>
-@foreach (var cs in Model.CustomFields)
+@if (Model.CustomFields.Any())
 {
-    <h4>@cs.CustomFieldName</h4>
-    foreach (var csv in cs.CustomFieldValues)
+    <h3>Custom Fields</h3>
+    foreach (var cs in Model.CustomFields)
     {
-        <dl class="dl-horizontal">
-            <dd>@csv.CustomFieldValueName</dd>
-        </dl>
+        int count = 1;
+        bool check = false;
+        string str_csf = "csf_" + @cs.CustomFieldID.ToString();
+
+        <div id="@str_csf" class="csf_id">
+            <h4>@cs.CustomFieldName</h4>
+            @foreach (var csv in cs.CustomFieldValues)
+            {
+                if (count == 1) { check = true; } else { check = false; }
+                <div class="row">
+                    <div class="col-md-3">
+                        @if (count == 1)
+                        {
+                            <input type="radio" id="@csv.CustomFieldValueID.ToString()" name="@str_csf" value="@csv.CustomFieldValueID.ToString()" checked="checked" /> @csv.CustomFieldValueName
+                        }
+                        else
+                        {
+                            <input type="radio" id="@csv.CustomFieldValueID.ToString()" name="@str_csf" value="@csv.CustomFieldValueID.ToString()" /> @csv.CustomFieldValueName
+                        }
+                    </div>
+                    <div>@csv.AdditionalPrice</div>
+                </div>
+                count++;
+            }
+            <hr />
+        </div>
     }
-    <hr />
+    <button class="add-to-cart" id="add-to-cart">AddToCart</button>
+}
+else
+{
+    <button class="add-to-cart1" id="@Model.ItemID">AddToCart</button>
+}
+
+@section Scripts {
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#add-to-cart').click(function () {
+                var customFieldArray = new Array();
+                $.each($('.csf_id'), function (index, value) {
+                    if ($("input[type='radio']:checked").val()) {
+                        var csf_id = $(value).attr('id');
+                        //alert($("input[name='"+csf_id+"']:checked").val());
+                        customFieldArray.push({
+                            CustomFieldID: $(value).attr('id').split('_')[1],
+                            CustomFieldValueID: $("input[name='" + csf_id + "']:checked").val()
+                        });
+                    }
+                });
+
+                alert(JSON.stringify(customFieldArray));
+
+                var id = @Html.Raw(Json.Encode(Model.ItemID));
+                var jsondata = { ItemID: id, ItemCustomFields: customFieldArray };
+                console.log(jsondata);
+                var id = $(this).attr("id");
+                $.ajax({
+                    url: '/Cart/AddToCart', type: "POST", dataType: "text",
+                    data: JSON.stringify(jsondata),
+                    success: function (data) {
+                        console.log(data);
+                        $("span").html(data);
+                    },
+                    error: function (xhr, status, error) {
+                        alert(xhr.responseText);
+                        alert(status);
+                        alert(error);
+                    }
+                });
+            });
+
+
+            $('.add-to-cart1').click(function () {
+                var id = $(this).attr("id");
+                $.ajax({
+                    url: '/Cart/AddToCart/' + id, type: "GET", dataType: "text",
+                    data: { id: id },
+                    success: function (data) {
+                        $("span").html(data);
+                    },
+                    error: function (xhr, status, error) {
+                        alert(xhr.responseText);
+                        alert(status);
+                        alert(error);
+                    }
+                });
+            });
+        });
+    </script>
 }
