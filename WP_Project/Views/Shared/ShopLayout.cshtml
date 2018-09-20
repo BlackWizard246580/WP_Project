@@ -5,12 +5,16 @@
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <link rel="icon" href="~/img/core-img/favicon.ico">
 
     <title>@ViewBag.Title | Andy's - Food Ordering Ecommerce</title>
+
+    <link href="~/Content/core-style.css" rel="stylesheet" />
     <link href="~/Content/landing-page.min.css" rel="stylesheet" />
+
     <link href="~/Content/animate.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    @*<link href="~/Content/bootstrap.css" rel="stylesheet" />*@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/business-frontpage.css" rel="stylesheet" />
     <link href="~/Content/classy-nav.min.css" rel="stylesheet" />
@@ -21,7 +25,8 @@
     <link href="~/Content/nice-select.css" rel="stylesheet" />
     <link href="~/Content/owl.carousel.css" rel="stylesheet" />
     <link href="~/Content/simple-line-icons.css" rel="stylesheet" />
-    <link href="~/Content/core-style.css" rel="stylesheet" />
+ 
+    
 
     @*@Styles.Render("~/Content/css")*@
     @*@Scripts.Render("~/bundles/modernizr")*@
@@ -55,7 +60,7 @@
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-                <a href="index.html"><img src="~/img/core-img/logo.png" alt=""></a>
+                <a href="@Url.Action("Index", "LayoutTest")"><img src="~/img/core-img/logo.png" alt=""></a>
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
@@ -71,7 +76,7 @@
             </div>
             <!-- Logo -->
             <div class="logo">
-                <a href="index.html"><img src="~/img/core-img/logo.png" alt=""></a>
+                <a href="@Url.Action("Index", "LayoutTest")"><img src="~/img/core-img/logo.png" alt=""></a>
             </div>
             <!-- Amado Nav -->
             <nav class="amado-nav">
@@ -92,7 +97,7 @@
             </div>
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-100">
-                <a href="cart.html" class="cart-nav"><img src="~/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
+                <a href="@Url.Action("Cart", "LayoutTest")" class="cart-nav"><img src="~/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
                 <a href="#" class="search-nav"><img src="~/img/core-img/search.png" alt=""> Search</a>
             </div>
             <!-- Social Button -->
@@ -123,7 +128,7 @@
                     <div class="single_widget_area">
                         <!-- Logo -->
                         <div class="footer-logo mr-50">
-                            <a href="index.html"><img src="~/img/core-img/logo2.png" alt=""></a>
+                            <a href="@Url.Action("Index", "LayoutTest")"><img src="~/img/core-img/logo2.png" alt=""></a>
                         </div>
                         <!-- Copywrite Text -->
                         <p class="copywrite">
@@ -141,19 +146,19 @@
                                 <div class="collapse navbar-collapse" id="footerNavContent">
                                     <ul class="navbar-nav ml-auto">
                                         <li class="nav-item active">
-                                            <a class="nav-link" href="index.html">Home</a>
+                                            <a class="nav-link" href="@Url.Action("Index", "LayoutTest")">Home</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="shop.html">Shop</a>
+                                            <a class="nav-link" href="@Url.Action("Shop", "LayoutTest")">Shop</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="product-details.html">Product</a>
+                                            <a class="nav-link" href="@Url.Action("ProductDetails", "LayoutTest")">Product</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="cart.html">Cart</a>
+                                            <a class="nav-link" href="@Url.Action("Cart", "LayoutTest")">Cart</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="checkout.html">Checkout</a>
+                                            <a class="nav-link" href="@Url.Action("Checkout", "LayoutTest")">Checkout</a>
                                         </li>
                                     </ul>
                                 </div>

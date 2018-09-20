@@ -7,13 +7,13 @@ namespace WP_Project.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class WP_11 : IMigrationMetadata
+    public sealed partial class CustomField_FieldValue_Item : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(WP_11));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CustomField_FieldValue_Item));
         
         string IMigrationMetadata.Id
         {
-            get { return "201809150736279_WP_1.1"; }
+            get { return "201809200718279_CustomField_FieldValue_Item"; }
         }
         
         string IMigrationMetadata.Source

@@ -189,7 +189,9 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Content\ItemController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LayoutTestController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -197,17 +199,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201809020339398_DBContext-1.cs" />
-    <Compile Include="Migrations\201809020339398_DBContext-1.Designer.cs">
-      <DependentUpon>201809020339398_DBContext-1.cs</DependentUpon>
+    <Compile Include="Migrations\201809191326072_Initial.cs" />
+    <Compile Include="Migrations\201809191326072_Initial.Designer.cs">
+      <DependentUpon>201809191326072_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201809150736279_WP_1.1.cs" />
-    <Compile Include="Migrations\201809150736279_WP_1.1.Designer.cs">
-      <DependentUpon>201809150736279_WP_1.1.cs</DependentUpon>
+    <Compile Include="Migrations\201809191331560_CateItem.cs" />
+    <Compile Include="Migrations\201809191331560_CateItem.Designer.cs">
+      <DependentUpon>201809191331560_CateItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201809160312016_update-item.cs" />
-    <Compile Include="Migrations\201809160312016_update-item.Designer.cs">
-      <DependentUpon>201809160312016_update-item.cs</DependentUpon>
+    <Compile Include="Migrations\201809200718279_CustomField_FieldValue_Item.cs" />
+    <Compile Include="Migrations\201809200718279_CustomField_FieldValue_Item.Designer.cs">
+      <DependentUpon>201809200718279_CustomField_FieldValue_Item.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -221,6 +223,7 @@
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ItemDetailVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -317,9 +320,15 @@
     <Content Include="Views\LayoutTest\Cart.cshtml" />
     <Content Include="Views\LayoutTest\Checkout.cshtml" />
     <Content Include="Views\LayoutTest\Index.cshtml" />
-    <Content Include="Views\LayoutTest\IndexSection.cshtml" />
     <Content Include="Views\Shared\IndexSection.cshtml" />
     <Content Include="Views\LayoutTest\ProductDetails.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Category\GetItems.cshtml" />
+    <Content Include="Views\Item\Create.cshtml" />
+    <Content Include="Views\Item\Delete.cshtml" />
+    <Content Include="Views\Item\Details.cshtml" />
+    <Content Include="Views\Item\Edit.cshtml" />
+    <Content Include="Views\Item\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -343,14 +352,14 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201809020339398_DBContext-1.resx">
-      <DependentUpon>201809020339398_DBContext-1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201809191326072_Initial.resx">
+      <DependentUpon>201809191326072_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809150736279_WP_1.1.resx">
-      <DependentUpon>201809150736279_WP_1.1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201809191331560_CateItem.resx">
+      <DependentUpon>201809191331560_CateItem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809160312016_update-item.resx">
-      <DependentUpon>201809160312016_update-item.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201809200718279_CustomField_FieldValue_Item.resx">
+      <DependentUpon>201809200718279_CustomField_FieldValue_Item.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

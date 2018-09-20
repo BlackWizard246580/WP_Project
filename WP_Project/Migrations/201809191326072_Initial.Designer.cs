@@ -7,13 +7,13 @@ namespace WP_Project.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class DBContext1 : IMigrationMetadata
+    public sealed partial class Initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(DBContext1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201809020339398_DBContext-1"; }
+            get { return "201809191326072_Initial"; }
         }
         
         string IMigrationMetadata.Source

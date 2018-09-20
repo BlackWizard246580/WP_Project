@@ -7,13 +7,13 @@ namespace WP_Project.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class updateitem : IMigrationMetadata
+    public sealed partial class CateItem : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(updateitem));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CateItem));
         
         string IMigrationMetadata.Id
         {
-            get { return "201809160312016_update-item"; }
+            get { return "201809191331560_CateItem"; }
         }
         
         string IMigrationMetadata.Source
