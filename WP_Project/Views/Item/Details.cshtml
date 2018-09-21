@@ -2,9 +2,11 @@
 
 @{
     ViewBag.Title = "Details";
+    int cartItemCount = (Session["cartItemCount"] != null) ? (int)Session["cartItemCount"] : 0;
 }
 
 <h2>@Model.ItemName - Details</h2>
+Count of CartItem - <span class="itemcount">@cartItemCount</span>
 
 <p>
     @Html.ActionLink("Back to List", "Index")
@@ -35,6 +37,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.ItemPrice)
+        </dd>
+
+        <dt>
+            Quantity
+        </dt>
+
+        <dd>
+            <input type="number" id="item_qty" />
         </dd>
 
     </dl>
@@ -96,14 +106,21 @@ else
                     }
                 });
 
-                alert(JSON.stringify(customFieldArray));
+                //alert(JSON.stringify(customFieldArray));
 
                 var id = @Html.Raw(Json.Encode(Model.ItemID));
-                var jsondata = { ItemID: id, ItemCustomFields: customFieldArray };
+                var qty = $("#item_qty").val();
+                var jsondata = { ItemID: id, QTY: qty, ItemCustomFields: customFieldArray };
+
                 console.log(jsondata);
+                alert(JSON.stringify(jsondata));
+
                 var id = $(this).attr("id");
                 $.ajax({
-                    url: '/Cart/AddToCart', type: "POST", dataType: "text",
+                    url: '/Cart/AddToCart',
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
                     data: JSON.stringify(jsondata),
                     success: function (data) {
                         console.log(data);
