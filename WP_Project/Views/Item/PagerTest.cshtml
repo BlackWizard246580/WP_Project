@@ -1,0 +1,150 @@
+﻿@model PagedList.IPagedList<WP_Project.Models.Item>
+    @using PagedList.Mvc;
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+    @{
+        ViewBag.Title = "PagerTest";
+        Layout = "~/Views/Shared/ShopLayout.cshtml";
+    }
+
+    @*<h2>Students</h2>*@
+
+    @using (Html.BeginForm("PagerTest", "Item", FormMethod.Get))
+    {
+    @*<p>
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>*@
+    }
+    @*<table class="table">
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.CategoryName)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.ItemID })
+            </td>
+        </tr>
+        }
+
+    </table>*@
+
+<div class="shop_sidebar_area">
+
+    <!-- ##### Single Widget ##### -->
+    <div class="widget catagory mb-50">
+        <!-- Widget Title -->
+        <h6 class="widget-title mb-30">Catagories</h6>
+
+        <!--  Catagories  -->
+        <div class="catagories-menu">
+            <ul>
+                <li class="active"><a href="#">Pizzas</a></li>
+                <li><a href="#">Sides</a></li>
+                <li><a href="#">Wings</a></li>
+                <li><a href="#">Desserts</a></li>
+                <li><a href="#">Drinks</a></li>
+            </ul>
+        </div>
+
+        @*<h6 class="widget-title mb-30">Sorting</h6>
+
+          Catagories  
+        <div class="catagories-menu">
+            <ul>
+                <li>@Html.ActionLink("Item Name", "PagerTest", new { sortOrder = ViewBag.ItemNameSortParm, currentFilter = ViewBag.CurrentFilter })</li>
+                <li>@Html.ActionLink("Item Price", "PagerTest", new { sortOrder = ViewBag.ItemPriceSortParm, currentFilter = ViewBag.CurrentFilter })</li>
+                <li>@Html.ActionLink("Category Name", "PagerTest", new { sortOrder = ViewBag.CategoryNameSortParm, currentFilter = ViewBag.CurrentFilter })</li>
+            </ul>
+        </div>*@
+    </div>
+</div>
+
+
+<div class="amado_product_area section-padding-100">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="product-topbar d-xl-flex align-items-end justify-content-between">
+                    <!-- Total Products -->
+                    <div class="total-products">
+                        <p>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</p>
+                    </div>
+                    <!-- Sorting -->
+                    <div class="product-sorting d-flex">
+                        <div class="sort-by-date d-flex align-items-center mr-15">
+                            <p>Sort by  </p>
+                            <form action="#" method="get">
+                                <select name="select" id="sortBydate">
+                                    <option value="value">@Html.ActionLink("Item Name", "PagerTest", new { sortOrder = ViewBag.ItemNameSortParm, currentFilter = ViewBag.CurrentFilter }).ToString()</option>
+                                    <option value="value">@Html.ActionLink("Item Price", "PagerTest", new { sortOrder = ViewBag.ItemPriceSortParm, currentFilter = ViewBag.CurrentFilter }).ToString()</option>
+                                    <option value="value">@Html.ActionLink("Category Name", "PagerTest", new { sortOrder = ViewBag.CategoryNameSortParm, currentFilter = ViewBag.CurrentFilter }).ToString()</option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @foreach (var item in Model)
+            {
+            <!-- Single Product Area -->
+                <div class="col-12 col-sm-6 col-md-12 col-xl-6">
+                    <div class="single-product-wrapper">
+                        <!-- Product Image -->
+                        <div class="product-img">
+                            <img id="img1" src="~/img/Items/@item.Image" />
+                        </div>
+
+                        <!-- Product Description -->
+                        <div class="product-description d-flex align-items-center justify-content-between">
+                            <!-- Product Meta Data -->
+                            <div class="product-meta-data">
+                                <div class="line"></div>
+                                <p class="product-price">@Html.DisplayFor(modelItem => item.ItemPrice) KS</p>
+                                <a href="/Item/Details/@item.ItemID">
+                                    <h6>@Html.DisplayFor(modelItem => item.ItemName)</h6>
+                                </a>
+                            </div>
+                            <!-- Ratings & Cart -->
+                            <div class="ratings-cart text-right">
+                                <div class="ratings">
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                </div>
+                                <div class="cart">
+                                    <a href="cart.html" data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src="~/img/core-img/cart.png" alt=""></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <!-- Pagination -->
+                <nav aria-label="navigation">
+                @Html.PagedListPager(Model, page => Url.Action("PagerTest",
+                new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

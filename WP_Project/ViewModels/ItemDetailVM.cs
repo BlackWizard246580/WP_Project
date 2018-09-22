@@ -10,6 +10,7 @@ namespace WP_Project.ViewModels
         public int ItemID { get; set; }
         public string ItemName { get; set; }
         public double ItemPrice { get; set; }
+        public string Image { get; set; }
         public Category Category { get; set; }
         public List<CustomField> CustomFields { get; set; }
     }

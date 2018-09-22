@@ -1,4 +1,4 @@
-﻿@model WP_Project.Models.Item
+﻿@model WP_Project.ViewModels.ItemDetailVM
 
 @{
     ViewBag.Title = "Details";
@@ -13,26 +13,25 @@
             <div class="col-12">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mt-50">
-                        <li class="breadcrumb-item">@Html.ActionLink(@Html.DisplayFor(model => model.Category.CategoryName).ToString(), "Index", new { id = Model.CategoryID })</li>
+                        <li class="breadcrumb-item">@Html.ActionLink(@Html.DisplayFor(model => model.Category.CategoryName).ToString(), "Index", new { id = Model.ItemID })</li>
                         <li class="breadcrumb-item"><a href="#">@Html.DisplayFor(model => model.ItemName)</a></li>
                     </ol>
                 </nav>
             </div>
         </div>
-
         <div class="row">
             <div class="col-12 col-lg-7">
                 <div class="single_product_thumb">
                     <div id="product_details_slider" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <a class="gallery_img" href="~/img/Items/@Html.DisplayFor(model => model.Image)">
-                                    <img class="d-block w-100" src="~/img/Items/@Html.DisplayFor(model => model.Image)" alt="First slide">
+                                <a class="gallery_img" href="~/img/Items/@Model.Image">
+                                    <img class="d-block w-100" src="~/img/Items/@Model.Image" alt="First slide">
                                 </a>
                             </div>
                             <div class="carousel-item">
-                                <a class="gallery_img" href="~/img/Items/@Html.DisplayFor(model => model.Image)">
-                                    <img class="d-block w-100" src="~/img/Items/@Html.DisplayFor(model => model.Image)" alt="Second slide">
+                                <a class="gallery_img" href="~/img/Items/@Model.Image">
+                                    <img class="d-block w-100" src="~/img/Items/@Model.Image" alt="Second slide">
                                 </a>
                             </div>
                         </div>
