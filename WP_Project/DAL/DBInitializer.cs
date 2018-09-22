@@ -32,6 +32,7 @@ namespace WP_Project.DAL
         //    new CustomFieldValue{CustomFieldValueName="Extra Tomato Sauce", AdditionalPrice=1000, CustomField=size},
         //    new CustomFieldValue{CustomFieldValueName="Extra BBQ Sauce", AdditionalPrice=1400, CustomField=size},
 
+        //    new CustomFieldValue{CustomFieldValueName="No Cheese", AdditionalPrice=0, CustomField=cheese},
         //    new CustomFieldValue{CustomFieldValueName="Mozzarela", AdditionalPrice=1500, CustomField=cheese},
         //    new CustomFieldValue{CustomFieldValueName="Cheddar", AdditionalPrice=1200, CustomField=cheese},
 
