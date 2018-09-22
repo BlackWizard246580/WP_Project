@@ -221,6 +221,10 @@
     <Compile Include="Migrations\201809220340574__Order_OrderDetail_OrderDetailCustomField.Designer.cs">
       <DependentUpon>201809220340574__Order_OrderDetail_OrderDetailCustomField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809220806448__ItemImage.cs" />
+    <Compile Include="Migrations\201809220806448__ItemImage.Designer.cs">
+      <DependentUpon>201809220806448__ItemImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CartItem.cs" />
@@ -271,6 +275,33 @@
     <Content Include="fonts\helveticaneue_medium-webfont.woff2" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\Items\Alphine 1L.jpg" />
+    <Content Include="img\Items\BBQ Beef.jpg" />
+    <Content Include="img\Items\BBQ Pork Ribs - Quarter Rack.jpg" />
+    <Content Include="img\Items\Buffalo Wings 10 Pack.jpg" />
+    <Content Include="img\Items\Buffalo Wings 6 Pack.jpg" />
+    <Content Include="img\Items\Cheese Lovers.jpg" />
+    <Content Include="img\Items\Cheesy Garlic Bread.jpg" />
+    <Content Include="img\Items\Chicken Supreme.jpg" />
+    <Content Include="img\Items\Chocolate Lava Cake.jpg" />
+    <Content Include="img\Items\Chocolate Mousse.jpg" />
+    <Content Include="img\Items\Cookie Pizza.jpg" />
+    <Content Include="img\Items\Garlic Bread.jpg" />
+    <Content Include="img\Items\Ham Lovers.jpg" />
+    <Content Include="img\Items\Mountain Dew 1.25L.jpg" />
+    <Content Include="img\Items\Mountain Dew 375ML.jpg" />
+    <Content Include="img\Items\Naked Wings 10 Pack.jpg" />
+    <Content Include="img\Items\Naked Wings 6 Pack.jpg" />
+    <Content Include="img\Items\Pepsi 1.25L.jpg" />
+    <Content Include="img\Items\Pepsi 375ML.jpg" />
+    <Content Include="img\Items\Seasoned Wings 10 Pack.jpg" />
+    <Content Include="img\Items\Seasoned Wings 6 Pack.jpg" />
+    <Content Include="img\Items\Spud Bites &amp; Tomatio Sauce Dipp.jpg" />
+    <Content Include="img\Items\Sunkist 1.25L.jpg" />
+    <Content Include="img\Items\Sunkist 375ML.jpg" />
+    <Content Include="img\Items\Tripple Dipers.jpg" />
+    <Content Include="img\Items\Ultimate Hot &amp; Spicy.jpg" />
+    <Content Include="img\Items\Vanilla Ice-Cream.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\active.js" />
@@ -343,7 +374,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="img\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -374,6 +404,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809220340574__Order_OrderDetail_OrderDetailCustomField.resx">
       <DependentUpon>201809220340574__Order_OrderDetail_OrderDetailCustomField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809220806448__ItemImage.resx">
+      <DependentUpon>201809220806448__ItemImage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

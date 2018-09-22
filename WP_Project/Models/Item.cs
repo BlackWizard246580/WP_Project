@@ -11,6 +11,7 @@ namespace WP_Project.Models
         public string ItemName { get; set; }
         public double ItemPrice { get; set; }
         public int CategoryID { get; set; }
+        public string Image { get; set; }
 
         public virtual Category Category { get; set; }
         public virtual ICollection<CustomField> CustomFields { get; set; }
