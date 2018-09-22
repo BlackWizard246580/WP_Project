@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<WP_Project.Models.Item>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "ItemIndex";
     Layout = "~/Views/Shared/ShopLayout.cshtml";
 }
 <div class="shop_sidebar_area">
@@ -29,12 +29,14 @@
         <div class="row">
             @foreach (var item in Model)
             {
+                //string url = Convert.ToString(item.ItemName) + ".jpg";
             <!-- Single Product Area -->
                 <div class="col-12 col-sm-6 col-md-12 col-xl-6">
                     <div class="single-product-wrapper">
                         <!-- Product Image -->
                         <div class="product-img">
-                            <img src="~/img/product-img/"+item.itemname+".jpg" alt="">
+                            @*<img src="~/img/product-img/"+item.itemname+".jpg" alt="">*@
+                            @*<img id="img1" src="~/img/url" />*@
                         </div>
 
                         <!-- Product Description -->

@@ -1,10 +1,11 @@
 ﻿@model IEnumerable<WP_Project.Models.Category>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "CateIndex";
+    Layout = "~/Views/Shared/ShopLayout.cshtml";
 }
-<h2>Category List</h2>
-@Html.ActionLink("All Items", "GetItems", "Category")
-<table class="table">
+@*<h2>Category List</h2>*@
+@*@Html.ActionLink("All Items", "GetItems", "Category")*@
+@*<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.CategoryName)
@@ -18,4 +19,24 @@
             </td>
         </tr>
     }
-</table>
+</table>*@
+
+<div class="shop_sidebar_area">
+
+    <!-- ##### Single Widget ##### -->
+    <div class="widget catagory mb-50">
+        <!-- Widget Title -->
+        <h6 class="widget-title mb-30">Catagories</h6>
+
+        <!--  Catagories  -->
+        <div class="catagories-menu">
+            <ul>
+@foreach (var item in Model)
+{
+                @*<li class ="active"><a href="/Category/GetItems/@item.CategoryID">@item.CategoryName</a></li>*@
+                <li class="active"><a href="/Item/Index/@item.CategoryID">@item.CategoryName</a></li>
+}
+            </ul>
+        </div>
+    </div>
+</div>
