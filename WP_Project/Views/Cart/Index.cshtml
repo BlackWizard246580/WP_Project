@@ -1,0 +1,42 @@
+﻿@model IEnumerable<WP_Project.ViewModels.CartViewVM>
+
+@{
+    ViewBag.Title = "Cart";
+}
+
+<h2>Cart</h2>
+
+@if (Session["cartItemCount"] != null)
+{
+    <table class="table table-bordered">
+        <tr>
+            <th>Item Name</th>
+            <th>Price</th>
+            <th>Category Name</th>
+            <th>Quantity</th>
+            <th>Custom Field</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.ItemName</td>
+            <td>@item.ItemPrice</td>
+            <td>@item.CategoryName</td>
+            <td>@item.QTY</td>
+            <td>
+                @if(item.ItemCustomFieldName != null) { 
+                    foreach (var cfn in item.ItemCustomFieldName)
+                    {
+                        @cfn.CustomFieldName <span> @cfn.CustomFieldValueName -  @cfn.AdditionalPrice</span>
+                        <br />
+                    }
+                }
+            </td>
+        </tr>
+        }
+    </table>
+}
+else
+{
+    < h3 > No Items </ h3 >
+}

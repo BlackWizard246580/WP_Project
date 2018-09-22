@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WP_Project.Models;
+using WP_Project.ViewModels;
 
 namespace WP_Project.Controllers
 {
@@ -14,7 +15,35 @@ namespace WP_Project.Controllers
         // GET: Cart
         public ActionResult Index()
         {
-            return View();
+            List<CartItem> cartItems = (List<CartItem>)Session["cartItems"];
+            List<CartViewVM> cartViewVM = new List<CartViewVM>();
+            foreach (CartItem item in cartItems)
+            {
+                List<ItemCustomField> ItemCF = item.ItemCustomFields;
+
+                Item tmp_item = db.Item.Where(x => x.ItemID == item.ItemID)
+                    .FirstOrDefault();
+                CartViewVM cartVM = new CartViewVM(tmp_item);
+                cartVM.QTY = item.QTY;
+                
+                if(item.ItemCustomFields != null) {
+                    cartVM.ItemCustomFieldName = new List<ItemCustomFieldName>();
+                    foreach (ItemCustomField icf in ItemCF)
+                    {
+                        CustomField tmp_cf = db.CustomField.Where(x => x.CustomFieldID == icf.CustomFieldID).FirstOrDefault();
+                        CustomFieldValue tmp_cfv = db.CustomFieldValue.Where(x => x.CustomFieldValueID == icf.CustomFieldValueID).FirstOrDefault();
+                        ItemCustomFieldName item_cfn = new ItemCustomFieldName(tmp_cf, tmp_cfv);
+
+                        if(item_cfn != null)
+                        { 
+                            cartVM.ItemCustomFieldName.Add(item_cfn);
+                        }
+                    }
+                }
+
+                cartViewVM.Add(cartVM);
+            }
+            return View(cartViewVM);
         }
 
         // GET: Cart/AddToCart/id

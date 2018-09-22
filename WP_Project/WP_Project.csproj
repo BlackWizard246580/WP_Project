@@ -239,12 +239,14 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\ItemCustomField.cs" />
+    <Compile Include="Models\ItemCustomFieldName.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\OrderDetailCustomField.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\CartViewVM.cs" />
     <Compile Include="ViewModels\ItemDetailVM.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -351,6 +353,7 @@
     <Content Include="Views\Item\Index.cshtml" />
     <Content Include="Views\Item\Details.cshtml" />
     <Content Include="Views\Item\PagerTest.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
