@@ -28,8 +28,10 @@ namespace WP_Project.Models
         public DbSet<CustomField> CustomField { get; set; }
         public DbSet<CustomFieldValue> CustomFieldValue { get; set; }
         public DbSet<Item> Item { get; set; }
-        //public DbSet<Order> Order { get; set; }
-        //public DbSet<OrderDetail> OrderDetail { get; set; }
+        public DbSet<Order> Order { get; set; }
+        public DbSet<OrderDetail> OrderDetail { get; set; }
+        public DbSet<OrderDetailCustomField> OrderDetailCustomField { get; set; }
+
 
 
         public static ApplicationDbContext Create()

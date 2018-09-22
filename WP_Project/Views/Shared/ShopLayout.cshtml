@@ -83,8 +83,8 @@
                 <ul>
                     @{ string stractive = "active";}
                     <li class="@if (ViewBag.Title == "Index") { @stractive}"><a href="@Url.Action("Index", "LayoutTest")">Home</a></li>
-                    <li class="@if (ViewBag.Title == "Shop") { @stractive}"><a href="@Url.Action("Shop", "LayoutTest")">Shop</a></li>
-                    <li class="@if (ViewBag.Title == "ProductDetails") { @stractive}"><a href="@Url.Action("ProductDetails", "LayoutTest")">Product</a></li>
+                    <li class="@if (ViewBag.Title == "Shop") { @stractive}"><a href="@Url.Action("Index", "Category")">Shop</a></li>
+                    @*<li class="@if (ViewBag.Title == "ProductDetails") { @stractive}"><a href="@Url.Action("ProductDetails", "LayoutTest")">Product</a></li>*@
                     <li class="@if (ViewBag.Title == "Cart") { @stractive}"><a href="@Url.Action("Cart", "LayoutTest")">Cart</a></li>
                     <li class="@if (ViewBag.Title == "Checkout") { @stractive}"><a href="@Url.Action("Checkout", "LayoutTest")">Checkout</a></li>
                 </ul>

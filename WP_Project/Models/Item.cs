@@ -14,5 +14,6 @@ namespace WP_Project.Models
 
         public virtual Category Category { get; set; }
         public virtual ICollection<CustomField> CustomFields { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

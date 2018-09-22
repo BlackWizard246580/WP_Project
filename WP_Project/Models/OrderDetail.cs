@@ -9,16 +9,14 @@ namespace WP_Project.Models
 {
     public class OrderDetail
     {
-        [Key]
-        [Column(Order = 1)]
+        public int OrderDetailID { get; set; }
         public int OrderID { get; set; }
-
-        [Key]
-        [Column(Order = 2)]
         public int ItemID { get; set; }
         public int Qty { get; set; }
-        public double Amount { get; set; }
+        public double SubTotalAmount { get; set; }
 
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual Order Order { get; set; }
+        public virtual Item Item { get; set; }
+        public virtual ICollection<OrderDetailCustomField> OrderDetailCustomFields { get; set; }
     }
 }
