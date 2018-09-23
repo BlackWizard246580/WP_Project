@@ -104,6 +104,7 @@ namespace WP_Project.Controllers
                 ItemDetailVM.ItemName = item.ItemName;
                 ItemDetailVM.ItemPrice = item.ItemPrice;
                 ItemDetailVM.Category = item.Category;
+                ItemDetailVM.Image = item.Image;
                 ItemDetailVM.CustomFields = CustomFields;
             }
 

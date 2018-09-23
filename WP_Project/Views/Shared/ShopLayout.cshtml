@@ -1,5 +1,4 @@
 ﻿@{
-    //ViewBag.Title = "| Andy's - Food Ordering Ecommerce";
     int cartItemCount = (Session["cartItemCount"] != null) ? (int)Session["cartItemCount"] : 0;
 }
 
@@ -20,7 +19,7 @@
 
     <link href="~/Content/animate.css" rel="stylesheet" />
     @*<link href="~/Content/bootstrap.css" rel="stylesheet" />*@
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    @*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
     <link href="~/Content/business-frontpage.css" rel="stylesheet" />
     <link href="~/Content/classy-nav.min.css" rel="stylesheet" />
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
@@ -94,7 +93,7 @@
                 <ul>
                     @{ string stractive = "active";}
                     <li class="@if (ViewBag.Title == "Index") { @stractive}"><a href="@Url.Action("Index", "LayoutTest")">Home</a></li>
-                    <li class="@if (ViewBag.Title == "Shop") { @stractive}"><a href="@Url.Action("PagerTest", "Item")">Shop</a></li>
+                    <li class="@if (ViewBag.Title == "PagerTest") { @stractive}"><a href="@Url.Action("PagerTest", "Item")">Shop</a></li>
                     @*<li class="@if (ViewBag.Title == "ProductDetails") { @stractive}"><a href="@Url.Action("ProductDetails", "LayoutTest")">Product</a></li>*@
                     <li class="@if (ViewBag.Title == "Cart") { @stractive}"><a href="@Url.Action("Index", "Cart")">Cart</a></li>
                     <li class="@if (ViewBag.Title == "Checkout") { @stractive}"><a href="@Url.Action("Checkout", "LayoutTest")">Checkout</a></li>
