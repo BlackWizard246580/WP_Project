@@ -118,5 +118,44 @@ namespace WP_Project.DAL
         //    categories.ForEach(s => context.Category.Add(s));
         //    context.SaveChanges();
         //}
+
+        internal void SeedCustomFieldItems(ApplicationDbContext context)
+        {
+            CustomField size = context.CustomField.Find(1);
+            CustomField sauce = context.CustomField.Find(2);
+            CustomField cheese = context.CustomField.Find(3);
+            CustomField spicy = context.CustomField.Find(4);
+
+            Item chicken_supreme = context.Item.Find(1);
+            chicken_supreme.CustomFields.Add(size);
+            chicken_supreme.CustomFields.Add(sauce);
+            chicken_supreme.CustomFields.Add(cheese);
+
+            Item cheese_lover = context.Item.Find(2);
+            cheese_lover.CustomFields.Add(size);
+            cheese_lover.CustomFields.Add(cheese);
+
+            Item ham_lover = context.Item.Find(3);
+            ham_lover.CustomFields.Add(size);
+            ham_lover.CustomFields.Add(sauce);
+
+            Item bbq_beef = context.Item.Find(4);
+            ham_lover.CustomFields.Add(size);
+            ham_lover.CustomFields.Add(sauce);
+
+            Item hot_spicy = context.Item.Find(5);
+            hot_spicy.CustomFields.Add(size);
+            hot_spicy.CustomFields.Add(sauce);
+            hot_spicy.CustomFields.Add(spicy);
+
+            Item cheesy_garlic_bread = context.Item.Find(7);
+            cheese_lover.CustomFields.Add(cheese);
+
+            Item tripple_dippers = context.Item.Find(9);
+            tripple_dippers.CustomFields.Add(sauce);
+            tripple_dippers.CustomFields.Add(spicy);
+
+            context.SaveChanges();
+        }
     }
 }

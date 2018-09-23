@@ -24,6 +24,7 @@ namespace WP_Project.Migrations
 
             //dbInit.SeedCustomField(context);
             //dbInit.SeedCustomFieldValue(context);
+            //dbInit.SeedCustomFieldItems(context);
 
         }
     }

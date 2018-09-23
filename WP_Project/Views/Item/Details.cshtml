@@ -13,7 +13,8 @@
             <div class="col-12">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mt-50">
-                        <li class="breadcrumb-item">@Html.ActionLink(@Html.DisplayFor(model => model.Category.CategoryName).ToString(), "Index", new { id = Model.ItemID })</li>
+                        @*<li class="breadcrumb-item">@Html.ActionLink(@Html.DisplayFor(model => model.Category.CategoryName).ToString(), "Index", new { id = Model.Category.CategoryID })</li>*@
+                        <li class="breadcrumb-item"><a href="/Category/GetItems/@Model.Category.CategoryID">@Model.Category.CategoryName</a></li>
                         <li class="breadcrumb-item"><a href="#">@Html.DisplayFor(model => model.ItemName)</a></li>
                     </ol>
                 </nav>
@@ -65,24 +66,135 @@
                         <p>Order this delicious food now! Click the below button to add this food to cart.</p>
                     </div>
 
-                    <!-- Add to Cart Form -->
-                    <form class="cart clearfix" method="post">
-                        <div class="cart-btn d-flex mb-50">
-                            <p>Qty</p>
-                            <div class="quantity">
-                                <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
-                                <input type="number" class="qty-text" id="qty" step="1" min="1" max="300" name="quantity" value="1">
-                                <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></span>
-                            </div>
+                    <div class="cart-btn d-flex mb-50">
+                        <p>Qty: &nbsp;&nbsp;&nbsp;</p>
+                        <div class="quantity">
+                            @*<span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-caret-down" aria-hidden="true"></i></span>*@
+                            @*<input type="number" class="qty-text" id="qty" step="1" min="1" max="5" name="quantity" value="1">*@
+                            <input type="number" class="qty-text" id="item_qty" step="1" min="1" max="5" name="quantity" value="1"/>
+                            @*<span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></span>*@
                         </div>
-                        <button type="submit" name="addtocart" value="5" class="btn amado-btn">Add to cart</button>
-                    </form>
+                    </div>
 
+                    @if (Model.CustomFields.Any())
+                    {
+                        <h3>Custom Fields</h3>
+                        foreach (var cs in Model.CustomFields)
+                        {
+                            int count = 1;
+                            bool check = false;
+                            string str_csf = "csf_" + @cs.CustomFieldID.ToString();
+
+                            <div id="@str_csf" class="csf_id">
+                                <h4>@cs.CustomFieldName</h4>
+                                @foreach (var csv in cs.CustomFieldValues)
+                                {
+                                    if (count == 1) { check = true; } else { check = false; }
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            @if (count == 1)
+                        {
+                                                <input type="radio" id="@csv.CustomFieldValueID.ToString()" name="@str_csf" value="@csv.CustomFieldValueID.ToString()" checked="checked" /> @csv.CustomFieldValueName
+                                            }
+                                            else
+                                            {
+                                                <input type="radio" id="@csv.CustomFieldValueID.ToString()" name="@str_csf" value="@csv.CustomFieldValueID.ToString()" /> @csv.CustomFieldValueName
+                                            }
+                                        </div>
+                                        <div>@csv.AdditionalPrice</div>
+                                    </div>
+                                    count++;
+                                }
+                                <hr />
+                            </div>
+                        }
+                        @*<button class="btn amado-btn" id="add-to-cart" button type="submit" name="addtocart" value="5">Add to Cart</button>*@
+                        @*<button type="submit" name="addtocart" value="5" class="btn amado-btn">Add to cart</button>*@
+
+                        <!-- Add to Cart Form -->
+                        <form class="cart clearfix" method="post">
+                            <button class="btn amado-btn" id="add-to-cart" button type="submit" name="addtocart" value="5">Add to Cart</button>
+                        </form>
+                    }
+                    else
+                    {
+                        @*<button class="add-to-cart1" id="@Model.ItemID">AddToCart</button>*@
+                        @*<button class="btn amado-btn" id="add-to-cart1" button type="submit" name="addtocart" value="5">Add to Cart</button>*@
+
+                        <form class="cart clearfix" method="post">
+                            <button class="btn amado-btn" id="add-to-cart1" button type="submit" name="addtocart" value="5">Add to Cart</button>
+                        </form>
+                    }
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#add-to-cart').click(function () {
+                var customFieldArray = new Array();
+                $.each($('.csf_id'), function (index, value) {
+                    if ($("input[type='radio']:checked").val()) {
+                        var csf_id = $(value).attr('id');
+                        //alert($("input[name='"+csf_id+"']:checked").val());
+                        customFieldArray.push({
+                            CustomFieldID: $(value).attr('id').split('_')[1],
+                            CustomFieldValueID: $("input[name='" + csf_id + "']:checked").val()
+                        });
+                    }
+                });
+
+                //alert(JSON.stringify(customFieldArray));
+
+                var id = @Html.Raw(Json.Encode(Model.ItemID));
+                var qty = $("#item_qty").val();
+                var jsondata = { ItemID: id, QTY: qty, ItemCustomFields: customFieldArray };
+
+                console.log(jsondata);
+                alert(JSON.stringify(jsondata));
+
+                var id = $(this).attr("id");
+                $.ajax({
+                    url: '/Cart/AddToCart',
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: JSON.stringify(jsondata),
+                    success: function (data) {
+                        console.log(data);
+                        $("span").html(data);
+                    },
+                    error: function (xhr, status, error) {
+                        alert(xhr.responseText);
+                        alert(status);
+                        alert(error);
+                    }
+                });
+            });
+
+
+            $('.add-to-cart1').click(function () {
+                var id = $(this).attr("id");
+                $.ajax({
+                    url: '/Cart/AddToCart/' + id, type: "GET", dataType: "text",
+                    data: { id: id },
+                    success: function (data) {
+                        $("span").html(data);
+                    },
+                    error: function (xhr, status, error) {
+                        alert(xhr.responseText);
+                        alert(status);
+                        alert(error);
+                    }
+                });
+            });
+        });
+    </script>
+}
 
 @*<div>
         <h4>Item</h4>
