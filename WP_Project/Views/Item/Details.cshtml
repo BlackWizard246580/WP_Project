@@ -75,10 +75,9 @@
                             @*<span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></span>*@
                         </div>
                     </div>
-
                     @if (Model.CustomFields.Any())
                     {
-                        <h3>Custom Fields</h3>
+                        <h2>Choose Custom Fields for This Item</h2>
                         foreach (var cs in Model.CustomFields)
                         {
                             int count = 1;
@@ -91,9 +90,9 @@
                                 {
                                     if (count == 1) { check = true; } else { check = false; }
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-7">
                                             @if (count == 1)
-                        {
+                                            {
                                                 <input type="radio" id="@csv.CustomFieldValueID.ToString()" name="@str_csf" value="@csv.CustomFieldValueID.ToString()" checked="checked" /> @csv.CustomFieldValueName
                                             }
                                             else
@@ -101,13 +100,14 @@
                                                 <input type="radio" id="@csv.CustomFieldValueID.ToString()" name="@str_csf" value="@csv.CustomFieldValueID.ToString()" /> @csv.CustomFieldValueName
                                             }
                                         </div>
-                                        <div>@csv.AdditionalPrice</div>
+                                        <div>@csv.AdditionalPrice KS</div>
+                                        <hr>
                                     </div>
                                     count++;
                                 }
-                                <hr />
                             </div>
                         }
+                        <hr>
                         @*<button class="btn amado-btn" id="add-to-cart" button type="submit" name="addtocart" value="5">Add to Cart</button>*@
                         @*<button type="submit" name="addtocart" value="5" class="btn amado-btn">Add to cart</button>*@
 

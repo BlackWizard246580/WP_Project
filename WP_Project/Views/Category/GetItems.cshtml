@@ -1,45 +1,7 @@
-﻿@*@model IEnumerable<WP_Project.Models.Item>
-@{
-    ViewBag.Title = "GetItems";
-    Layout = "~/Views/Shared/ShopLayout.cshtml";
-}
-<h2>@ViewBag.CategoryName</h2>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Category.CategoryName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ItemName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ItemPrice)
-        </th>
-        <th></th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.CategoryName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ItemName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ItemPrice)
-            </td>
-        </tr>
-    }
-</table>
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>*@
-
-@model IEnumerable<WP_Project.Models.Item>
+﻿@model IEnumerable<WP_Project.Models.Item>
 
 @{
-    ViewBag.Title = "ItemIndex";
+    ViewBag.Title = "Item Index";
     Layout = "~/Views/Shared/ShopLayout.cshtml";
 }
 <div class="shop_sidebar_area">
@@ -48,15 +10,15 @@
     <div class="widget catagory mb-50">
         <!-- Widget Title -->
         <h6 class="widget-title mb-30">Catagories</h6>
-
         <!--  Catagories  -->
         <div class="catagories-menu">
             <ul>
-                <li><a href="/Category/GetItems/1">Pizzas</a></li>
-                <li><a href="/Category/GetItems/2">Sides</a></li>
-                <li><a href="/Category/GetItems/3">Wings</a></li>
-                <li><a href="/Category/GetItems/4">Desserts</a></li>
-                <li><a href="/Category/GetItems/5">Drinks</a></li>
+                @{ string stractive = "active";}
+                <li class="@if ("9" == "1") { @stractive}"><a href="/Category/GetItems/1" id="9">Pizzas</a></li>
+                <li class="@if ("9" == "2") { @stractive}"><a href="/Category/GetItems/2">Sides</a></li>
+                <li class="@if ("9" == "3") { @stractive}"><a href="/Category/GetItems/3">Wings</a></li>
+                <li class="@if ("9" == "4") { @stractive}"><a href="/Category/GetItems/4">Desserts</a></li>
+                <li class="@if ("9" == "5") { @stractive}"><a href="/Category/GetItems/5">Drinks</a></li>
             </ul>
         </div>
     </div>
@@ -67,7 +29,6 @@
         <div class="row">
             @foreach (var item in Model)
             {
-                string url = "~/img/Items/" + Convert.ToString(item.Image);
             <!-- Single Product Area -->
                 <div class="col-12 col-sm-6 col-md-12 col-xl-6">
                     <div class="single-product-wrapper">
