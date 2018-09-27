@@ -51,6 +51,24 @@ namespace WP_Project.Controllers
             return View(cartViewVM);
         }
 
+        [HttpPost]
+        public ActionResult ChangeQty(string Key, int qty)
+        {
+            List<CartItem> cartItems = (List<CartItem>)Session["cartItems"];
+            int index = isKeyExist(Key, cartItems);
+            cartItems[index].QTY = qty;
+            return Json("success");
+        }
+
+        [HttpPost]
+        public ActionResult Remove(string Key)
+        {
+            List<CartItem> cartItems = (List<CartItem>)Session["cartItems"];
+            var item = cartItems.Where(x => x.Key == Key).FirstOrDefault();
+            if (item != null) cartItems.Remove(item);
+            return Json("Success Removing Item from cart");
+        }
+
         // GET: Cart/AddToCart/id
         [HttpGet]
         public ActionResult AddToCart(int id, int qty)
@@ -172,6 +190,14 @@ namespace WP_Project.Controllers
                     indexList.Add(i);
                 }
             return indexList;
+        }
+
+        private int isKeyExist(string Key, List<CartItem> cartItems)
+        {
+            for (int i = 0; i < cartItems.Count; i++)
+                if (cartItems[i].Key == Key)
+                    return i;
+            return -1;
         }
     }
 }

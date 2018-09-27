@@ -8,35 +8,150 @@
 
 @if (Session["cartItemCount"] != null)
 {
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="cart">
         <tr>
             <th>Item Name</th>
             <th>Price</th>
             <th>Category Name</th>
             <th>Quantity</th>
             <th>Custom Field</th>
+            <th></th>
         </tr>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>@item.ItemName</td>
-            <td>@item.ItemPrice</td>
-            <td>@item.CategoryName</td>
-            <td>@item.QTY</td>
-            <td>
-                @if(item.ItemCustomFieldName != null) { 
-                    foreach (var cfn in item.ItemCustomFieldName)
+            <tr id="tbl-@item.Key">
+                <td>@item.ItemName</td>
+                <td>@item.ItemPrice</td>
+                <td>@item.CategoryName</td>
+                <td>
+                    <button class="qty-minus">-</button>
+                    <input type="text" value="@item.QTY" id="@item.Key" class="qty"/>
+                    <button class="qty-plus">+</button>
+                </td>
+                <td>
+                    @if (item.ItemCustomFieldName != null)
                     {
-                        @cfn.CustomFieldName <span> @cfn.CustomFieldValueName -  @cfn.AdditionalPrice</span>
-                        <br />
+                        foreach (var cfn in item.ItemCustomFieldName)
+                        {
+                            @cfn.CustomFieldName <span> @cfn.CustomFieldValueName -  @cfn.AdditionalPrice</span>
+                            <br />
+                        }
                     }
-                }
-            </td>
-        </tr>
+                </td>
+                <td>
+                    <button class="remove">X</button>
+                    <input type="hidden" id="@item.Key"/>
+                </td>
+            </tr>
         }
     </table>
 }
 else
 {
     <h3> No Items </h3>
+}
+
+@section Scripts {
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('.qty-minus').click(function () {
+                //alert($(this).next('input').val());
+                var qty = $(this).next('input').val();
+                var qty = (!isNaN(qty) && (qty>1) ) ? (qty-1): 1;
+                alert(qty);
+
+                var Key = $(this).next('input').attr("id");
+                alert(Key);
+
+                $.ajax({
+                    url: '/Cart/ChangeQty', type: "POST", dataType: "text",
+                    data: { Key: Key , qty:qty},
+                    success: function (data) {
+                        $("#" + Key).val(qty);
+                        alert(data);
+                    },
+                    error: function (xhr, status, error) {
+                        alert(xhr.responseText);
+                        alert(status);
+                        alert(error);
+                    }
+                });
+
+            });
+
+
+            $('.qty-plus').click(function () {
+                var qty = $(this).prev('input').val();
+                var qty = (!isNaN(qty) && (qty > 0)) ? (++qty) : 1;
+                alert(qty);
+
+                var Key = $(this).prev('input').attr("id");
+                alert(Key);
+
+                $.ajax({
+                    url: '/Cart/ChangeQty', type: "POST", dataType: "text",
+                    data: { Key: Key, qty: qty },
+                    success: function (data) {
+                        $("#" + Key).val(qty);
+                        alert(data);
+                    },
+                    error: function (xhr, status, error) {
+                        alert(xhr.responseText);
+                        alert(status);
+                        alert(error);
+                    }
+                });
+
+            });
+
+            $('.qty').change(function () {
+                //alert($(this).next('input').val());
+                var qty = $(this).val();
+                var qty = (!isNaN(qty) && (qty > 0)) ? qty : 1;
+                alert(qty);
+
+                var Key = $(this).attr("id");
+                alert(Key);
+
+                $.ajax({
+                    url: '/Cart/ChangeQty', type: "POST", dataType: "text",
+                    data: { Key: Key, qty: qty },
+                    success: function (data) {
+                        $("#" + Key).val(qty);
+                        alert(data);
+                    },
+                    error: function (xhr, status, error) {
+                        alert(xhr.responseText);
+                        alert(status);
+                        alert(error);
+                    }
+                });
+
+            });
+
+            $('.remove').click(function () {
+                var Key = $(this).next('input').attr("id");
+                alert(Key);
+
+                $.ajax({
+                    url: '/Cart/Remove', type: "POST", dataType: "text",
+                    data: { Key: Key },
+                    success: function (data) {
+                        $('table#cart tr#tbl-' + Key).remove();
+                        alert(data);
+                    },
+                    error: function (xhr, status, error) {
+                        alert(xhr.responseText);
+                        alert(status);
+                        alert(error);
+                    }
+                });
+
+            });
+
+        });
+    </script>
 }
