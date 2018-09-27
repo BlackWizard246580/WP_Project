@@ -104,22 +104,6 @@ namespace WP_Project.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Order(OrderFormVM model)
-        //{
-        //    var aa = "test";
-        //    //if (ModelState.IsValid)
-        //    //{
-        //        string userID = User.Identity.GetUserId();
-        //        Session["DeliverAddress"] = model.Address;
-        //        Session["OrderDateTime"] = model.OrderDateTime;
-        //        return View("Checkout");
-        //    //}
-
-        //    return View(model);
-        //}
-
         [HttpPost]
         public ActionResult Checkout(OrderFormVM model)
         {
@@ -184,9 +168,11 @@ namespace WP_Project.Controllers
                     orderDetail.SubTotalAmount = cartVM.SubTotal;
 
                     Total += cartVM.SubTotal;
+                    order.Total = Total;
                     cartViewVM.Add(cartVM);
                 }
-                order.Total = Total;
+                Session["cartItems"] = null;
+                //Session.Remove("cartItems");
                 db.SaveChanges();
             }
             ViewBag.Total = Total;
