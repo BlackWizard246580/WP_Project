@@ -17,67 +17,73 @@ namespace WP_Project.Controllers
         {
             List<CartItem> cartItems = (List<CartItem>)Session["cartItems"];
             List<CartViewVM> cartViewVM = new List<CartViewVM>();
-            foreach (CartItem item in cartItems)
+            if (cartItems != null)
             {
-                List<ItemCustomField> ItemCF = item.ItemCustomFields;
+                foreach (CartItem item in cartItems)
+                {
+                    List<ItemCustomField> ItemCF = item.ItemCustomFields;
 
-                Item tmp_item = db.Item.Where(x => x.ItemID == item.ItemID)
-                    .FirstOrDefault();
-                CartViewVM cartVM = new CartViewVM(tmp_item);
-                cartVM.QTY = item.QTY;
-                
-                if(item.ItemCustomFields != null) {
-                    cartVM.ItemCustomFieldName = new List<ItemCustomFieldName>();
-                    foreach (ItemCustomField icf in ItemCF)
+                    Item tmp_item = db.Item.Where(x => x.ItemID == item.ItemID)
+                        .FirstOrDefault();
+                    CartViewVM cartVM = new CartViewVM(tmp_item);
+                    cartVM.QTY = item.QTY;
+
+                    if (item.ItemCustomFields != null)
                     {
-                        CustomField tmp_cf = db.CustomField.Where(x => x.CustomFieldID == icf.CustomFieldID).FirstOrDefault();
-                        CustomFieldValue tmp_cfv = db.CustomFieldValue.Where(x => x.CustomFieldValueID == icf.CustomFieldValueID).FirstOrDefault();
-                        ItemCustomFieldName item_cfn = new ItemCustomFieldName(tmp_cf, tmp_cfv);
+                        cartVM.ItemCustomFieldName = new List<ItemCustomFieldName>();
+                        foreach (ItemCustomField icf in ItemCF)
+                        {
+                            CustomField tmp_cf = db.CustomField.Where(x => x.CustomFieldID == icf.CustomFieldID).FirstOrDefault();
+                            CustomFieldValue tmp_cfv = db.CustomFieldValue.Where(x => x.CustomFieldValueID == icf.CustomFieldValueID).FirstOrDefault();
+                            ItemCustomFieldName item_cfn = new ItemCustomFieldName(tmp_cf, tmp_cfv);
 
-                        if(item_cfn != null)
-                        { 
-                            cartVM.ItemCustomFieldName.Add(item_cfn);
+                            if (item_cfn != null)
+                            {
+                                cartVM.ItemCustomFieldName.Add(item_cfn);
+                            }
                         }
                     }
-                }
 
-                cartViewVM.Add(cartVM);
+                    cartViewVM.Add(cartVM);
+                }
             }
             return View(cartViewVM);
         }
 
         // GET: Cart/AddToCart/id
         [HttpGet]
-        public ActionResult AddToCart(int id)
+        public ActionResult AddToCart(int id, int qty)
         {
-            //No Need
-            //Item Item = db.Item.Where(x => x.ItemID == id).First();
-
             if (Session["cartItems"] == null)
             {
                 List<CartItem> cartItems = new List<CartItem>();
-                cartItems.Add(new CartItem { ItemID = id, QTY = 1 });
+                cartItems.Add(new CartItem { Key = GenerateKey(), ItemID = id, QTY = qty });
                 Session["cartItems"] = cartItems;
                 Session["cartItemCount"] = cartItems.Count();
             }
             else
             {
                 List<CartItem> cartItems = (List<CartItem>)Session["cartItems"];
-                int index = isExist(id, cartItems);
-                if (index != -1)
+                List<int> indexList = isExist(id, cartItems);
+                if (indexList == null || indexList.Count == 0)
                 {
-                    cartItems[index].QTY++;
+                    cartItems.Add(new CartItem { Key = GenerateKey(), ItemID = id, QTY = qty });
                 }
                 else
                 {
-                    cartItems.Add(new CartItem { ItemID = id, QTY = 1 });
+                    for(int i=0; i < indexList.Count; i++)
+                    {
+                        int index = indexList[i];
+                        if(cartItems[index].ItemCustomFields == null)
+                        {
+                            cartItems[index].QTY += qty;
+                        }
+                    }
                 }
                 Session["cartItems"] = cartItems;
                 Session["cartItemCount"] = cartItems.Count();
             }
-
-            //return RedirectToAction("Index", "Item");
-            
+                        
             return Content((Session["cartItemCount"]).ToString());
         }
 
@@ -89,6 +95,7 @@ namespace WP_Project.Controllers
             if (cartItem != null)
             {
                 cartItem.QTY = (cartItem.QTY <= 0) ? 1 : cartItem.QTY;
+                cartItem.Key = GenerateKey();
                 List<ItemCustomField> itemsCF = cartItem.ItemCustomFields.ToList();
 
                 if (Session["cartItems"] == null)
@@ -101,40 +108,47 @@ namespace WP_Project.Controllers
                 else
                 {
                     List<CartItem> cartItems = (List<CartItem>)Session["cartItems"];
-                    int index = isExist(cartItem.ItemID, cartItems);
-                    if (index != -1)
+                    List<int> indexList = isExist(cartItem.ItemID, cartItems);
+                    
+                    if (indexList == null || indexList.Count == 0)
                     {
-                        CartItem chk_cartItem = cartItems[index];
-                        if(chk_cartItem.ItemCustomFields != null)
-                        {
-                            bool isSame = true;
-                            for (int i = 0; i < itemsCF.Count; i++)
-                            {
-                                if ((chk_cartItem.ItemCustomFields[i].CustomFieldID == itemsCF[i].CustomFieldID)
-                                    && (chk_cartItem.ItemCustomFields[i].CustomFieldValueID != itemsCF[i].CustomFieldValueID))
-                                { isSame = false; break; }
-                            }
-
-                            if (isSame)
-                            {
-                                cartItems[index].QTY++;
-                            }
-                            else
-                            {
-                                cartItems.Add(cartItem);
-                            }
-                        }
+                        cartItems.Add(cartItem);
                     }
                     else
                     {
-                        cartItems.Add(cartItem);
+                        bool found = false;
+                        for (int i = 0; i < indexList.Count; i++)
+                        {
+                            int index = indexList[i];
+                            if (cartItems[index].ItemCustomFields != null)
+                            {
+                                bool isSame = true;
+                                for (int j = 0; j < itemsCF.Count; j++)
+                                {
+                                    if ((cartItems[index].ItemCustomFields[j].CustomFieldID == itemsCF[j].CustomFieldID)
+                                        && (cartItems[index].ItemCustomFields[j].CustomFieldValueID != itemsCF[j].CustomFieldValueID))
+                                    { isSame = false; break; }
+                                }
+
+                                if (isSame)
+                                {
+                                    cartItems[index].QTY += cartItem.QTY;
+                                    found = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (!found)
+                        {
+                            cartItems.Add(cartItem);
+                        }
                     }
                     Session["cartItems"] = cartItems;
                     Session["cartItemCount"] = cartItems.Count();
                 }
 
                 return Json((Session["cartItemCount"]).ToString());
-                //return Content((Session["cartItemCount"]).ToString());
             }
             else
             {
@@ -142,12 +156,21 @@ namespace WP_Project.Controllers
             }
         }
 
-        private int isExist(int itemId, List<CartItem> cartItems)
+        public string GenerateKey()
         {
+            return DateTime.Now.ToString("yyyyMMddHHmmssfff");
+        }
+
+        private List<int> isExist(int itemId, List<CartItem> cartItems)
+        {
+            List<int> indexList = new List<int>();
+            int j = 0;
             for (int i = 0; i < cartItems.Count; i++)
                 if (cartItems[i].ItemID == itemId)
-                    return i;
-            return -1;
+                {
+                    indexList.Add(i);
+                }
+            return indexList;
         }
     }
 }

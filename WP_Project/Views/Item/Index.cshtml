@@ -10,7 +10,7 @@
 Count of CartItem - <span class="itemcount">@cartItemCount</span>
 
 <table class="table">
-    <tr>
+    <tr>    
         <th>
             @Html.DisplayNameFor(model => model.Category.CategoryName)
         </th>
@@ -57,7 +57,7 @@ Count of CartItem - <span class="itemcount">@cartItemCount</span>
                 var id = $(this).attr("id");
                 $.ajax({
                     url: '/Cart/AddToCart/'+id, type: "GET", dataType: "text",
-                    data: { id: id },
+                    data: { id: id , qty:1},
                     success: function (data) {
                         $("span").html(data);
                     },
