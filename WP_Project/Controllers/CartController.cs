@@ -51,6 +51,51 @@ namespace WP_Project.Controllers
             return View(cartViewVM);
         }
 
+        // GET: Cart
+        public ActionResult CheckAmount()
+        {
+            List<CartItem> cartItems = (List<CartItem>)Session["cartItems"];
+            List<CartViewVM> cartViewVM = new List<CartViewVM>();
+            double Total = 0;
+            if (cartItems != null)
+            {
+                foreach (CartItem item in cartItems)
+                {
+                    List<ItemCustomField> ItemCF = item.ItemCustomFields;
+
+                    Item tmp_item = db.Item.Where(x => x.ItemID == item.ItemID)
+                        .FirstOrDefault();
+                    CartViewVM cartVM = new CartViewVM(tmp_item);
+                    cartVM.Key = item.Key;
+                    cartVM.QTY = item.QTY;
+                    cartVM.SubTotal = cartVM.QTY * cartVM.ItemPrice;
+
+                    if (item.ItemCustomFields != null)
+                    {
+                        double addPrice = 0;
+                        cartVM.ItemCustomFieldName = new List<ItemCustomFieldName>();
+                        foreach (ItemCustomField icf in ItemCF)
+                        {
+                            CustomField tmp_cf = db.CustomField.Where(x => x.CustomFieldID == icf.CustomFieldID).FirstOrDefault();
+                            CustomFieldValue tmp_cfv = db.CustomFieldValue.Where(x => x.CustomFieldValueID == icf.CustomFieldValueID).FirstOrDefault();
+                            ItemCustomFieldName item_cfn = new ItemCustomFieldName(tmp_cf, tmp_cfv);
+
+                            if (item_cfn != null)
+                            {
+                                cartVM.ItemCustomFieldName.Add(item_cfn);
+                                if (item_cfn.AdditionalPrice > 0) addPrice += item_cfn.AdditionalPrice;
+                            }
+                        }
+                        cartVM.SubTotal += (cartVM.QTY * addPrice);
+                    }
+                    Total += cartVM.SubTotal;
+                    cartViewVM.Add(cartVM);
+                }
+            }
+            ViewBag.Total = Total;
+            return View(cartViewVM);
+        }
+
         [HttpPost]
         public ActionResult ChangeQty(string Key, int qty)
         {
@@ -90,14 +135,17 @@ namespace WP_Project.Controllers
                 }
                 else
                 {
+                    bool statusNew = true;
                     for(int i=0; i < indexList.Count; i++)
                     {
                         int index = indexList[i];
                         if(cartItems[index].ItemCustomFields == null)
                         {
+                            statusNew = false;
                             cartItems[index].QTY += qty;
                         }
                     }
+                    if(statusNew) cartItems.Add(new CartItem { Key = GenerateKey(), ItemID = id, QTY = qty });
                 }
                 Session["cartItems"] = cartItems;
                 Session["cartItemCount"] = cartItems.Count();

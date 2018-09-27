@@ -354,6 +354,7 @@
     <Content Include="Views\Item\Details.cshtml" />
     <Content Include="Views\Item\PagerTest.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Cart\CheckAmount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -37,5 +37,7 @@ namespace WP_Project.ViewModels
         public string CategoryName { get; set; }
         public int QTY { get; set; }
         public List<ItemCustomFieldName> ItemCustomFieldName { get; set; }
+
+        public double SubTotal { get; set; }
     }
 }

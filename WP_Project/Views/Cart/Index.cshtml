@@ -25,7 +25,7 @@
                 <td>@item.CategoryName</td>
                 <td>
                     <button class="qty-minus">-</button>
-                    <input type="text" value="@item.QTY" id="@item.Key" class="qty"/>
+                    <input type="text" value="@item.QTY" id="@item.Key" class="qty" />
                     <button class="qty-plus">+</button>
                 </td>
                 <td>
@@ -40,11 +40,13 @@
                 </td>
                 <td>
                     <button class="remove">X</button>
-                    <input type="hidden" id="@item.Key"/>
+                    <input type="hidden" id="@item.Key" />
                 </td>
             </tr>
         }
     </table>
+
+    @Html.ActionLink("Check Amount", "CheckAmount")
 }
 else
 {
@@ -60,7 +62,7 @@ else
             $('.qty-minus').click(function () {
                 //alert($(this).next('input').val());
                 var qty = $(this).next('input').val();
-                var qty = (!isNaN(qty) && (qty>1) ) ? (qty-1): 1;
+                var qty = (!isNaN(qty) && (qty > 1)) ? (qty - 1) : 1;
                 alert(qty);
 
                 var Key = $(this).next('input').attr("id");
@@ -68,7 +70,7 @@ else
 
                 $.ajax({
                     url: '/Cart/ChangeQty', type: "POST", dataType: "text",
-                    data: { Key: Key , qty:qty},
+                    data: { Key: Key, qty: qty },
                     success: function (data) {
                         $("#" + Key).val(qty);
                         alert(data);
