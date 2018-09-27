@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -94,6 +95,103 @@ namespace WP_Project.Controllers
             }
             ViewBag.Total = Total;
             return View(cartViewVM);
+        }
+
+        // GET: Cart
+        [Authorize]
+        public ActionResult Order()
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Order(OrderFormVM model)
+        //{
+        //    var aa = "test";
+        //    //if (ModelState.IsValid)
+        //    //{
+        //        string userID = User.Identity.GetUserId();
+        //        Session["DeliverAddress"] = model.Address;
+        //        Session["OrderDateTime"] = model.OrderDateTime;
+        //        return View("Checkout");
+        //    //}
+
+        //    return View(model);
+        //}
+
+        [HttpPost]
+        public ActionResult Checkout(OrderFormVM model)
+        {
+            string userID = User.Identity.GetUserId();
+            List<CartItem> cartItems = (List<CartItem>)Session["cartItems"];
+            List<CartViewVM> cartViewVM = new List<CartViewVM>();
+            double Total = 0;
+            if (cartItems != null)
+            {
+                Order order = new Order();
+                order.OrderCreateDateTime = DateTime.Now;
+                order.DeliverAddress = model.Address;
+                order.OrderDateTime = model.OrderDateTime;
+                //order.OrderDateTime = (DateTime)Session["OrderDateTime"];
+                order.UserID = userID;
+                db.Order.Add(order);
+                //db.SaveChanges();
+
+                foreach (CartItem item in cartItems)
+                {
+                    List<ItemCustomField> ItemCF = item.ItemCustomFields;
+
+                    Item tmp_item = db.Item.Where(x => x.ItemID == item.ItemID)
+                        .FirstOrDefault();
+                    CartViewVM cartVM = new CartViewVM(tmp_item);
+                    cartVM.Key = item.Key;
+                    cartVM.QTY = item.QTY;
+                    cartVM.SubTotal = cartVM.QTY * cartVM.ItemPrice;
+
+                    OrderDetail orderDetail = new OrderDetail();
+                    orderDetail.Order = order;
+                    orderDetail.ItemID = item.ItemID;
+                    orderDetail.Qty = item.QTY;
+                    db.OrderDetail.Add(orderDetail);
+
+                    if (item.ItemCustomFields != null)
+                    {
+                        double addPrice = 0;
+                        cartVM.ItemCustomFieldName = new List<ItemCustomFieldName>();
+                        foreach (ItemCustomField icf in ItemCF)
+                        {
+                            CustomField tmp_cf = db.CustomField.Where(x => x.CustomFieldID == icf.CustomFieldID).FirstOrDefault();
+                            CustomFieldValue tmp_cfv = db.CustomFieldValue.Where(x => x.CustomFieldValueID == icf.CustomFieldValueID).FirstOrDefault();
+                            ItemCustomFieldName item_cfn = new ItemCustomFieldName(tmp_cf, tmp_cfv);
+
+                            OrderDetailCustomField odcf = new OrderDetailCustomField();
+                            odcf.OrderDetail = orderDetail;
+                            odcf.CustomFieldName = tmp_cf.CustomFieldName;
+                            odcf.CustomFieldValueName = tmp_cfv.CustomFieldValueName;
+                            odcf.AdditionalPrice = tmp_cfv.AdditionalPrice;
+                            db.OrderDetailCustomField.Add(odcf);
+
+                            if (item_cfn != null)
+                            {
+                                cartVM.ItemCustomFieldName.Add(item_cfn);
+                                if (item_cfn.AdditionalPrice > 0) addPrice += item_cfn.AdditionalPrice;
+                            }
+                        }
+                        cartVM.SubTotal += (cartVM.QTY * addPrice);
+                    }
+
+                    orderDetail.SubTotalAmount = cartVM.SubTotal;
+
+                    Total += cartVM.SubTotal;
+                    cartViewVM.Add(cartVM);
+                }
+                order.Total = Total;
+                db.SaveChanges();
+            }
+            ViewBag.Total = Total;
+            ViewBag.CheckoutStatus = "Checkout Success!";
+            return View();
         }
 
         [HttpPost]

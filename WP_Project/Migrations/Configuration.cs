@@ -18,12 +18,12 @@ namespace WP_Project.Migrations
 
         protected override void Seed(WP_Project.Models.ApplicationDbContext context)
         {
-            var dbInit = new DBInitializer();
-            dbInit.SeedCategory(context);
-            dbInit.SeedItem(context);
-            dbInit.SeedCustomField(context);
-            dbInit.SeedCustomFieldValue(context);
-            dbInit.SeedCustomFieldItems(context);
+            //var dbInit = new DBInitializer();
+            //dbInit.SeedCategory(context);
+            //dbInit.SeedItem(context);
+            //dbInit.SeedCustomField(context);
+            //dbInit.SeedCustomFieldValue(context);
+            //dbInit.SeedCustomFieldItems(context);
         }
     }
     }
