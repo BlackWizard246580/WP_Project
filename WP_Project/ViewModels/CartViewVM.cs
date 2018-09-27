@@ -8,8 +8,6 @@ namespace WP_Project.ViewModels
 {
     public class CartViewVM
     {
-        private object tmp_item;
-
         public CartViewVM()
         {
 
@@ -33,6 +31,7 @@ namespace WP_Project.ViewModels
         }
 
         public int ItemID { get; set; }
+        public string Key { get; set; }
         public string ItemName { get; set; }
         public double ItemPrice { get; set; }
         public string CategoryName { get; set; }

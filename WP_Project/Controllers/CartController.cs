@@ -26,6 +26,7 @@ namespace WP_Project.Controllers
                     Item tmp_item = db.Item.Where(x => x.ItemID == item.ItemID)
                         .FirstOrDefault();
                     CartViewVM cartVM = new CartViewVM(tmp_item);
+                    cartVM.Key = item.Key;
                     cartVM.QTY = item.QTY;
 
                     if (item.ItemCustomFields != null)
