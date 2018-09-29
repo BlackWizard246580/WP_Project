@@ -16,10 +16,10 @@
                     <table class="table table-bordered" id="cart">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Custom Fields</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
+                                <th>Name:</th>
+                                <th>Toppings:</th>
+                                <th>Price:</th>
+                                <th>Quantity:</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -31,14 +31,14 @@
                                         <a href="/Item/Details/@item.ItemID"><img src="~/img/Items/@item.Image" alt="Product"></a>
                                     </td>*@
                                     <td class="name">
-                                        <h5>@item.ItemName</h5>
+                                        <a href="/Item/Details/@item.ItemID"><h5>@item.ItemName</h5></a>
                                     </td>
                                     <td>
                                         @if (item.ItemCustomFieldName != null)
                                         {
                                             foreach (var cfn in item.ItemCustomFieldName)
                                             {
-                                                @cfn.CustomFieldName <span> @cfn.CustomFieldValueName -  @cfn.AdditionalPrice</span>
+                                                @cfn.CustomFieldName <span> @cfn.CustomFieldValueName -  @cfn.AdditionalPrice KS</span>
                                                 <br />
                                             }
                                         }
@@ -72,29 +72,6 @@
                         <h2>Shopping Cart is empty.</h2>
                     </div>
                 }
-                @*</div>*@
-            @*</div>*@
-            @*<div class="col-12 col-lg-4">
-                <div class="cart-summary">
-                    <h5>Cart Total</h5>
-                    <ul class="summary-table">
-                        <li><span>subtotal:</span> <span>$140.00</span></li>
-                        <li><span>delivery:</span> <span>Free</span></li>
-                        <li><span>total:</span> <span>$140.00</span></li>
-                    </ul>
-                    <div class="cart-btn mt-100">
-                        <a href="cart.html" class="btn amado-btn w-100" style="display: block;font-size: 16px;vertical-align: middle;line-height: -moz-block-height;">Checkout</a>
-                    </div>
-                </div>
-            </div>*@
-            @*<div class="quantity">
-            <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-            <input type="number" class="qty-text" id="qty" step="1" min="1" max="300" name="quantity" value="1">
-            <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
-        </div>*@
-            @*<td class="cart_product_img">
-            <a href="/Item/Details/@item.ItemID"><img src="~/img/Items/@item.Image" alt="Product"></a>
-        </td>*@
         </div>
     </div>
 </div>

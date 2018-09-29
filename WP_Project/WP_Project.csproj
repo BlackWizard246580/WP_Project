@@ -46,6 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
+      <HintPath>..\packages\Facebook.7.0.6\lib\net45\Facebook.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -226,6 +229,10 @@
     <Compile Include="Migrations\201809220806448__ItemImage.Designer.cs">
       <DependentUpon>201809220806448__ItemImage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809290730156_Add_UserOrder.cs" />
+    <Compile Include="Migrations\201809290730156_Add_UserOrder.Designer.cs">
+      <DependentUpon>201809290730156_Add_UserOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CartItem.cs" />
@@ -244,6 +251,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CartViewVM.cs" />
     <Compile Include="ViewModels\ItemDetailVM.cs" />
+    <Compile Include="ViewModels\OrderFormVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -329,6 +337,8 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Cart\CheckAmount.cshtml" />
+    <Content Include="Views\Cart\CheckOut.cshtml" />
+    <Content Include="Views\Cart\Order.cshtml" />
     <None Include="Views\Item\PagerTest.cshtml" />
     <Content Include="Views\LayoutTest\MapTest.html" />
     <Content Include="Web.config">
@@ -414,6 +424,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809220806448__ItemImage.resx">
       <DependentUpon>201809220806448__ItemImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809290730156_Add_UserOrder.resx">
+      <DependentUpon>201809290730156_Add_UserOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

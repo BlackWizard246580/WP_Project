@@ -12,7 +12,8 @@ namespace WP_Project.Models
         public DateTime OrderCreateDateTime { get; set; }
         public string DeliverAddress { get; set; }
         public double Total { get; set; }
-
+        public string UserID { get; set; }
+        public virtual ApplicationUser User { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

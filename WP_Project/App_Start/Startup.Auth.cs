@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using WP_Project.Models;
+using Microsoft.Owin.Security.Facebook;
 
 namespace WP_Project
 {
@@ -54,9 +55,20 @@ namespace WP_Project
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(new FacebookAuthenticationOptions
+            {
+                AppId = "304759716970952",
+                AppSecret = "e311e82dbd7a73e4af258edeb1f59a89",
+                Scope = { "email" },
+                Provider = new FacebookAuthenticationProvider
+                {
+                    OnAuthenticated = context =>
+                    {
+                        context.Identity.AddClaim(new System.Security.Claims.Claim("FacebookAccessToken", context.AccessToken));
+                        return System.Threading.Tasks.Task.FromResult(true);
+                    }
+                }
+            });
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

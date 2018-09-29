@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WP_Project.Models;
+using Facebook;
 
 namespace WP_Project.Controllers
 {
@@ -322,6 +323,13 @@ namespace WP_Project.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
+            var identity = AuthenticationManager.GetExternalIdentity(DefaultAuthenticationTypes.ExternalCookie);
+            var accessToken = identity.FindFirstValue("FacebookAccessToken");
+            dynamic userInfo = new FacebookClient(accessToken).Get("/me?fields=email,first_name,last_name");
+            string Email = userInfo["email"];
+            string FirstName = userInfo["first_name"];
+            string LastName = userInfo["last_name"];
+
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
             {

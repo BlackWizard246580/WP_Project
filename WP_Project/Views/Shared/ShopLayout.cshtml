@@ -96,7 +96,7 @@
                     <li class="@if (ViewBag.Title == "PagerTest") { @stractive}"><a href="@Url.Action("PagerTest", "Item")">Shop</a></li>
                     @*<li class="@if (ViewBag.Title == "ProductDetails") { @stractive}"><a href="@Url.Action("ProductDetails", "LayoutTest")">Product</a></li>*@
                     <li class="@if (ViewBag.Title == "Cart") { @stractive}"><a href="@Url.Action("Index", "Cart")">Cart</a></li>
-                    <li class="@if (ViewBag.Title == "Checkout") { @stractive}"><a href="@Url.Action("Checkout", "LayoutTest")">Checkout</a></li>
+                    <li class="@if (ViewBag.Title == "Checkout") { @stractive}"><a href="@Url.Action("CheckAmount", "Cart")">Checkout</a></li>
                 </ul>
             </nav>
             <!-- Button Group -->
@@ -168,7 +168,7 @@
                                             <a class="nav-link" href="@Url.Action("Index", "Cart")">Cart</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="@Url.Action("Checkout", "LayoutTest")">Checkout</a>
+                                            <a class="nav-link" href="@Url.Action("CheckAmount", "Cart")">Checkout</a>
                                         </li>
                                     </ul>
                                 </div>
