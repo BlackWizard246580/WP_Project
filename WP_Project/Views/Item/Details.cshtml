@@ -180,9 +180,10 @@
 
             $('.add-to-cart1').click(function () {
                 var id = $(this).attr("id");
+                var qty = $("#item_qty").val();
                 $.ajax({
                     url: '/Cart/AddToCart/' + id, type: "GET", dataType: "text",
-                    data: { id: id },
+                    data: { id: id, qty: qty },
                     success: function (data) {
                         $("span").html(data);
                     },

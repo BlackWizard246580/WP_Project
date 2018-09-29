@@ -328,7 +328,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Cart\CheckAmount.cshtml" />
     <None Include="Views\Item\PagerTest.cshtml" />
+    <Content Include="Views\LayoutTest\MapTest.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

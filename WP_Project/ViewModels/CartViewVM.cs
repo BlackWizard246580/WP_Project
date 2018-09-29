@@ -7,7 +7,6 @@ namespace WP_Project.ViewModels
 {
     public class CartViewVM
     {
-        private object tmp_item;
         public CartViewVM()
         {
         }
@@ -29,11 +28,14 @@ namespace WP_Project.ViewModels
             QTY = qty;
         }
         public int ItemID { get; set; }
+        public string Key { get; set; }
         public string ItemName { get; set; }
         public double ItemPrice { get; set; }
         public string CategoryName { get; set; }
         public string Image { get; set; }
         public int QTY { get; set; }
         public List<ItemCustomFieldName> ItemCustomFieldName { get; set; }
+
+        public double SubTotal { get; set; }
     }
 }
