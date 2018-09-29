@@ -16,7 +16,7 @@ namespace WP_Project
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "LayoutTest", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

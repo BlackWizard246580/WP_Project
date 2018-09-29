@@ -410,7 +410,7 @@ namespace WP_Project.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "LayoutTest");
         }
 
         //
@@ -467,7 +467,7 @@ namespace WP_Project.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Order", "Cart");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
