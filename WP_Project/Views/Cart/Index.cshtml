@@ -86,22 +86,22 @@
                 //alert($(this).next('input').val());
                 var qty = $(this).next('input').val();
                 var qty = (!isNaN(qty) && (qty > 1)) ? (qty - 1) : 1;
-                alert(qty);
+                //alert(qty);
 
                 var Key = $(this).next('input').attr("id");
-                alert(Key);
+                //alert(Key);
 
                 $.ajax({
                     url: '/Cart/ChangeQty', type: "POST", dataType: "text",
                     data: { Key: Key, qty: qty },
                     success: function (data) {
                         $("#" + Key).val(qty);
-                        alert(data);
+                        //alert(data);
                     },
                     error: function (xhr, status, error) {
-                        alert(xhr.responseText);
-                        alert(status);
-                        alert(error);
+                        //alert(xhr.responseText);
+                        //alert(status);
+                        //alert(error);
                     }
                 });
 
@@ -111,22 +111,22 @@
             $('.qty-plus').click(function () {
                 var qty = $(this).prev('input').val();
                 var qty = (!isNaN(qty) && (qty > 0)) ? (++qty) : 1;
-                alert(qty);
+                //alert(qty);
 
                 var Key = $(this).prev('input').attr("id");
-                alert(Key);
+                //alert(Key);
 
                 $.ajax({
                     url: '/Cart/ChangeQty', type: "POST", dataType: "text",
                     data: { Key: Key, qty: qty },
                     success: function (data) {
                         $("#" + Key).val(qty);
-                        alert(data);
+                        //alert(data);
                     },
                     error: function (xhr, status, error) {
-                        alert(xhr.responseText);
-                        alert(status);
-                        alert(error);
+                        //alert(xhr.responseText);
+                        //alert(status);
+                        //alert(error);
                     }
                 });
 
@@ -136,22 +136,22 @@
                 //alert($(this).next('input').val());
                 var qty = $(this).val();
                 var qty = (!isNaN(qty) && (qty > 0)) ? qty : 1;
-                alert(qty);
+                //alert(qty);
 
                 var Key = $(this).attr("id");
-                alert(Key);
+                //alert(Key);
 
                 $.ajax({
                     url: '/Cart/ChangeQty', type: "POST", dataType: "text",
                     data: { Key: Key, qty: qty },
                     success: function (data) {
                         $("#" + Key).val(qty);
-                        alert(data);
+                        //alert(data);
                     },
                     error: function (xhr, status, error) {
-                        alert(xhr.responseText);
-                        alert(status);
-                        alert(error);
+                        //alert(xhr.responseText);
+                        //alert(status);
+                        //alert(error);
                     }
                 });
 
@@ -159,19 +159,19 @@
 
             $('.remove').click(function () {
                 var Key = $(this).next('input').attr("id");
-                alert(Key);
+                //alert(Key);
 
                 $.ajax({
                     url: '/Cart/Remove', type: "POST", dataType: "text",
                     data: { Key: Key },
                     success: function (data) {
                         $('table#cart tr#tbl-' + Key).remove();
-                        alert(data);
+                        //alert(data);
                     },
                     error: function (xhr, status, error) {
-                        alert(xhr.responseText);
-                        alert(status);
-                        alert(error);
+                        //alert(xhr.responseText);
+                        //alert(status);
+                        //alert(error);
                     }
                 });
 

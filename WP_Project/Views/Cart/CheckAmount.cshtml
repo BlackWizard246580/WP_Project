@@ -6,66 +6,68 @@
 }
 
 <div class="cart-table-area section-padding-100">
-
     <div class="container-fluid">
-@if (Session["cartItemCount"] != null)
+            @if (Session["cartItemCount"] != null)
             {
                 <div class="cart-title mt-50">
                     <h2>Shopping Cart</h2>
                 </div>
-                    <table class="table table-bordered" id="cart">
-                        <thead>
-                            <tr>
-                                <th>Item Name:</th>           
-                                <th>Price:</th>
-                                <th>Quantity:</th>
-                                <th>Sub Total:</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr id="tbl-@item.Key">
-                                    <td>
-                                        @item.ItemName
-                                        <br>
-                                        @if (item.ItemCustomFieldName != null)
+                <table class="table table-bordered" id="cart">
+                    <thead>
+                        <tr>
+                            <th>Item Name:</th>
+                            <th>Price:</th>
+                            <th>Quantity:</th>
+                            <th>Sub Total:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr id="tbl-@item.Key">
+                                <td>
+                                    @item.ItemName
+                                    <br>
+                                    @if (item.ItemCustomFieldName != null)
+                                    {
+                                        foreach (var cfn in item.ItemCustomFieldName)
                                         {
-                                            foreach (var cfn in item.ItemCustomFieldName)
-                                            {
-                                                @cfn.CustomFieldName <span> @cfn.CustomFieldValueName -  @cfn.AdditionalPrice KS</span>
-                                                <br>
-                                            }
+                                            @cfn.CustomFieldName <span> @cfn.CustomFieldValueName -  @cfn.AdditionalPrice KS</span>
+                                            <br>
                                         }
-                                    </td>
-                                    <td>@item.ItemPrice KS</td>
-                                    <td>@item.QTY</td>
-                                    <td>@item.SubTotal</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-            <div class="cart-summary">
-                <h5>Cart Total</h5>
-                <ul class="summary-table">
-                    <li><span>delivery:</span> <span>Free</span></li>
-                    <li><span>total:</span> <span>@ViewBag.Total KS</span></li>
-                </ul>
-                <!-- Cash on delivery -->
-                <div class="custom-control custom-checkbox mr-sm-2">
-                    <input type="checkbox" class="custom-control-input" id="cod" checked>
-                    <label class="custom-control-label" for="cod">Cash on Delivery</label>
+                                    }
+                                </td>
+                                <td>@item.ItemPrice KS</td>
+                                <td>@item.QTY</td>
+                                <td>@item.SubTotal</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="cart-summary">
+                    <h5>Cart Total</h5>
+                    <ul class="summary-table">
+                        <li><span>delivery:</span> <span>Free</span></li>
+                        <li><span>total:</span> <span>@ViewBag.Total KS</span></li>
+                    </ul>
+                    <!-- Cash on delivery -->
+                    <div class="custom-control custom-checkbox mr-sm-2">
+                        <input type="checkbox" class="custom-control-input" id="cod" checked>
+                        <label class="custom-control-label" for="cod">Cash on Delivery</label>
+                    </div>
+                    <div class="cart-btn mt-100">
+                        <a href="/Cart/Order" class="btn amado-btn w-100" style="display: block;font-size: 16px;vertical-align: middle;line-height: -moz-block-height;">Checkout</a>
+                    </div>
                 </div>
-                <div class="cart-btn mt-100">
-                    <a href="/Cart/Order" class="btn amado-btn w-100" style="display: block;font-size: 16px;vertical-align: middle;line-height: -moz-block-height;">Checkout</a>
-                </div>
-            </div>
             }
             else
             {
-                <div class="cart-title mt-50">
-                    <h2>Shopping Cart is empty.</h2>
+                <div class="row">
+                    <div class="cart-title mt-50">
+                        <h2>Shopping Cart is empty.</h2>
+                    </div>
                 </div>
             }
-        </div>
+                
+    </div>
     </div>

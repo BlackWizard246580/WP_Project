@@ -156,7 +156,7 @@
                 var jsondata = { ItemID: id, QTY: qty, ItemCustomFields: customFieldArray };
 
                 console.log(jsondata);
-                alert(JSON.stringify(jsondata));
+                //alert(JSON.stringify(jsondata));
 
                 var id = $(this).attr("id");
                 $.ajax({
@@ -167,12 +167,13 @@
                     data: JSON.stringify(jsondata),
                     success: function (data) {
                         console.log(data);
-                        $("span").html(data);
+                        $("#cartitemcount").html(data);
+                        alert("+cf");
                     },
                     error: function (xhr, status, error) {
-                        alert(xhr.responseText);
-                        alert(status);
-                        alert(error);
+                        //alert(xhr.responseText);
+                        //alert(status);
+                        //alert(error);
                     }
                 });
             });
@@ -185,12 +186,13 @@
                     url: '/Cart/AddToCart/' + id, type: "GET", dataType: "text",
                     data: { id: id, qty: qty },
                     success: function (data) {
-                        $("span").html(data);
+                        $("#cartitemcount").html(data);
+                        alert("hello");
                     },
                     error: function (xhr, status, error) {
-                        alert(xhr.responseText);
-                        alert(status);
-                        alert(error);
+                        //alert(xhr.responseText);
+                        //alert(status);
+                        //alert(error);
                     }
                 });
             });
